@@ -38,7 +38,7 @@ public class CategoryServiceImplTest {
 
     @Test
     public void save() {
-        ProductCategory productCategory = new ProductCategory("爆款限定", 1);
+        ProductCategory productCategory = new ProductCategory("Q弹口感", 3);
         ProductCategory result = categoryService.save(productCategory);
         Assert.assertNotNull(result);
     }

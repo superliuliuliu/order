@@ -30,14 +30,14 @@ public class ProductCategoryRepositoryTest {
     @Test
     public void saveTest(){
         ProductInfo productInfo = new ProductInfo();
-        productInfo.setProductId("41040219971107");
-        productInfo.setProductName("寂寞凉面2");
-        productInfo.setCategoryType(1);
-        productInfo.setProductDescription("非常好吃的一款凉面再配上一份皮蛋瘦肉粥简直无法用言语来描述");
+        productInfo.setProductId("41040219971109");
+        productInfo.setProductName("虾仁寿司");
+        productInfo.setCategoryType(3);
+        productInfo.setProductDescription("Q弹口感给你不一样的体验");
         productInfo.setProductIcon("https://osstestlgy.oss-cn-beijing.aliyuncs.com/default_handsome.jpg?x-oss-process=style/imgforhead");
         productInfo.setProductStatus(0);
         productInfo.setProductStock(10);
-        productInfo.setProductPrice(new BigDecimal(8.0));
+        productInfo.setProductPrice(new BigDecimal(14.0));
         ProductInfo result = productInfoRepository.save(productInfo);
         Assert.assertNotNull(result);
 
