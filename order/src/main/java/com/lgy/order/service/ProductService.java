@@ -1,6 +1,7 @@
 package com.lgy.order.service;
 
 import com.lgy.order.dataobject.ProductInfo;
+import com.lgy.order.dto.CartDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -18,5 +19,8 @@ public interface ProductService {
 
     ProductInfo save(ProductInfo productInfo);
 
-    //加库存  减库存 在用户购买商品时以及买家更新数据时使用
+    //加库存  减库存 在用户购买商品时以及买家更新数据时使用  因为在同一时刻可能有多个用户提交了订单信息
+    void increaseStock(List<CartDto> cartDtoList);
+
+    void decreaseStock(List<CartDto> cartDtoList);
 }
