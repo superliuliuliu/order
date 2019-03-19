@@ -106,7 +106,7 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * CANCEL
-     * @description 修改数据库中该订单的状态为CANCEL
+     * @description 修改数据库中该订单的状态为CANCEL  需要注意的是订单取消之后订单对应的每个产品的库存应该在加回去 并删除响应的订单详情记录
      * @param
      * @return
      * @author liugaoyang
@@ -123,7 +123,8 @@ public class OrderServiceImpl implements OrderService {
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }
         orderMaster.setOrderStatus(OrderStatusEnum.CANCEL.getCode());
-        return null;
+        orderDto.setOrderStatus(OrderStatusEnum.CANCEL.getCode());
+        return orderDto;
     }
 
     @Override

@@ -61,6 +61,9 @@ public class OrderServiceImplTest {
 
     @Test
     public void cancel() {
+        OrderDto orderDto = orderService.findOne("3233791552922032297");
+        orderDto = orderService.cancel(orderDto);
+        logger.info("【取消订单】 order={}", orderDto);
     }
 
     @Test
