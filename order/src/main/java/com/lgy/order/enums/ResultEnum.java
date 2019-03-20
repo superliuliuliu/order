@@ -24,7 +24,10 @@ public enum ResultEnum {
     ORDER_UPDATE_ERROR(15, "订单更新失败"),
     ORDER_DETAIL_NULL(16, "订单详情为空"),
     ORDER_FINISH_ERROR(17, "订单完结失败"),
-    ORDER_ALREADY_FINISH(18, "订单重复完结")
+    ORDER_ALREADY_FINISH(18, "订单重复完结"),
+    ORDER_ALREADY_PAY(19, "订单重复支付"),
+    ORDER_PAY_ERROR(20, "订单支付失败"),
+    ORDER_TIMEOUT(21, "订单已过期")
     ;
 
     private Integer code;
