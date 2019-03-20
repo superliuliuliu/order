@@ -13,10 +13,13 @@ import java.util.Random;
  */
 public class KeyUtil {
 
+    private KeyUtil(){
+        throw new IllegalStateException("Utility class");
+    }
+
     //以当前的毫秒数与随机数  同时因为是获取唯一id因此要防止多线程下时间相同
     public static synchronized String getUniqueKey(){
-        Random random = new Random();
-        Integer number = random.nextInt(900000) + 100000;
-        return String.valueOf(number) + System.currentTimeMillis();
+        Integer number = new Random().nextInt(900000) + 100000;
+        return  System.currentTimeMillis() + String.valueOf(number) ;
     }
 }
