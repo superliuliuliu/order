@@ -1,5 +1,6 @@
 package com.lgy.order.service.Impl;
 
+import com.lgy.order.converter.OrderMaster2OrderDto;
 import com.lgy.order.dataobject.OrderDetail;
 import com.lgy.order.dataobject.OrderMaster;
 import com.lgy.order.dataobject.ProductInfo;
@@ -14,9 +15,11 @@ import com.lgy.order.repository.OrderMasterRepository;
 import com.lgy.order.service.OrderService;
 import com.lgy.order.service.ProductService;
 import com.lgy.order.util.KeyUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +30,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
@@ -101,13 +105,16 @@ public class OrderServiceImpl implements OrderService {
     //查询订单列表
     @Override
     public Page<OrderDto> findList(String buyerOpenid, Pageable pageable) {
-        return null;
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findByBuyerOpenid(buyerOpenid, pageable);
+        List<OrderDto> orderDtoList = OrderMaster2OrderDto.convert(orderMasterPage.getContent());
+        Page<OrderDto> orderDtoPage = new PageImpl<OrderDto>(orderDtoList, pageable,orderMasterPage.getTotalElements());
+        return orderDtoPage;
     }
 
     /**
      * CANCEL
      * @description 修改数据库中该订单的状态为CANCEL  需要注意的是订单取消之后订单对应的每个产品的库存应该在加回去 并删除响应的订单详情记录
-     * @param
+     * @param orderDto
      * @return
      * @author liugaoyang
      * @date 2019/3/19 8:57
@@ -116,28 +123,72 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public OrderDto cancel(OrderDto orderDto) {
-        //在修改订单状态之时 订单dto对象中id属性不应该为空
+        //在修改订单状态之时 首先要查看订单的状态
         String orderId = orderDto.getOrderId();
         OrderMaster orderMaster = orderMasterRepository.findOne(orderId);
         if(orderMaster == null){
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }
+        //查询并判断订单的状态 订单处于完结状态和取消状态的话不能取消
+        if(!orderMaster.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())){
+            log.error("【取消订单】订单状态不正确，已经完结的订单不能再取消并且不能重复取消同一个订单");
+            throw new SellException(ResultEnum.ORDER_STATE_ERROR);
+        }
+        //修改订单状态 并根据结果来判定订单修改是否成功
         orderMaster.setOrderStatus(OrderStatusEnum.CANCEL.getCode());
+        OrderMaster result = orderMasterRepository.save(orderMaster);
+        if(result == null) {
+            log.error("【取消订单】订单更新失败, orderMaster={}", orderMaster);
+            throw new SellException(ResultEnum.ORDER_UPDATE_ERROR);
+        }
+        //商品库存信息更新  首先判断是否有商品详情
+        if(CollectionUtils.isEmpty(orderDto.getOrderDetailList())){
+            log.error("【取消订单】订单详情为空,orderDto={}", orderDto);
+            throw new SellException(ResultEnum.ORDER_DETAIL_NULL);
+        }
+        List<CartDto> cartDtoList = orderDto.getOrderDetailList().stream().map(e->
+                new CartDto(e.getProductId(), e.getProductQuantity())).collect(Collectors.toList());
+        productService.increaseStock(cartDtoList);
+
+        //如果订单支付成功之后需要进行相关的退款工作
+        if(orderMaster.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())){
+            //TODO
+        }
         orderDto.setOrderStatus(OrderStatusEnum.CANCEL.getCode());
         return orderDto;
     }
 
+    /**
+     * finish
+     * @description 完结订单
+     * @param orderDto
+     * @return com.lgy.order.dto.OrderDto
+     * @author liugaoyang
+     * @date 2019/3/20 17:30
+     * @version 1.0.0
+     */
     @Override
     @Transactional
     public OrderDto finish(OrderDto orderDto) {
-        //在修改订单状态之时 订单dto对象中id属性不应该为空
+        //首先根据订单ID查询主订单信息
         String orderId = orderDto.getOrderId();
         OrderMaster orderMaster = orderMasterRepository.findOne(orderId);
         if(orderMaster == null){
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }
+        //查询订单状态 不能重复将一个订单修改为完结状态 取消的订单和新建的订单可以修改为完结状态
+        if(orderMaster.getOrderStatus().equals(OrderStatusEnum.FINISH.getCode())){
+            log.error("【完结订单】订单已完结,无法执行其他修改操作");
+            throw new SellException(ResultEnum.ORDER_ALREADY_FINISH);
+        }
         orderMaster.setOrderStatus(OrderStatusEnum.FINISH.getCode());
-        return null;
+        OrderMaster result = orderMasterRepository.save(orderMaster);
+        if(result == null){
+            log.error("【完结订单】完结订单失败");
+            throw new SellException(ResultEnum.ORDER_FINISH_ERROR);
+        }
+        orderDto.setOrderStatus(OrderStatusEnum.FINISH.getCode());
+        return orderDto;
     }
 
     @Override
@@ -145,7 +196,7 @@ public class OrderServiceImpl implements OrderService {
     /**
      * paid
      * @description 对应订单的支付操作  将对应状态为修改为已支付状态
-     * @param [orderDto]
+     * @param orderDto
      * @return com.lgy.order.dto.OrderDto
      * @author liugaoyang
      * @date 2019/3/19 9:05
@@ -158,6 +209,7 @@ public class OrderServiceImpl implements OrderService {
         if(orderMaster == null){
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }
+
         orderMaster.setPayStatus(PayStatusEnum.SUCCESS.getCode());
         return null;
     }
