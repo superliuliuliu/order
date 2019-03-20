@@ -107,8 +107,7 @@ public class OrderServiceImpl implements OrderService {
     public Page<OrderDto> findList(String buyerOpenid, Pageable pageable) {
         Page<OrderMaster> orderMasterPage = orderMasterRepository.findByBuyerOpenid(buyerOpenid, pageable);
         List<OrderDto> orderDtoList = OrderMaster2OrderDto.convert(orderMasterPage.getContent());
-        Page<OrderDto> orderDtoPage = new PageImpl<OrderDto>(orderDtoList, pageable,orderMasterPage.getTotalElements());
-        return orderDtoPage;
+        return new PageImpl<>(orderDtoList, pageable,orderMasterPage.getTotalElements());
     }
 
     /**
