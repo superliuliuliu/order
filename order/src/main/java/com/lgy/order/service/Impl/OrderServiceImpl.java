@@ -62,8 +62,10 @@ public class OrderServiceImpl implements OrderService {
             //将订单详情数据入库
             orderDetail.setDetailId(KeyUtil.getUniqueKey());
             orderDetail.setOrderId(orderId);
-            //将商品信息的属性拷贝到订单详情项中  比如商品名称 商品价格等
-            BeanUtils.copyProperties(productInfo, orderDetail);
+            //将商品信息的属性拷贝到订单详情项中  比如商品名称 商品价格等  TODO存在bug会导致订单详情的创建时间和修改时间异常
+            orderDetail.setProductName(productInfo.getProductName());
+            orderDetail.setProductPrice(productInfo.getProductPrice());
+            orderDetail.setProductIcon(productInfo.getProductIcon());
             //计算订单总价
             orderAmount = orderDetail.getProductPrice().multiply(new BigDecimal(orderDetail.getProductQuantity())).add(orderAmount);
             orderDetailRepository.save(orderDetail);
@@ -194,7 +196,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     /**
      * paid
-     * @description 对应订单的支付操作  将对应状态为修改为已支付状态
+     * @description 对应订单的支付操作  将对应状态为修改为已支付状态  在支付订单时 不仅要判定支付状态  还要判定订单的状态
      * @param orderDto
      * @return com.lgy.order.dto.OrderDto
      * @author liugaoyang
@@ -208,8 +210,24 @@ public class OrderServiceImpl implements OrderService {
         if(orderMaster == null){
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }
-
+        //查询订单状态（包括订单状态  订单处于完结和取消的订单不能再支付）
+        if(!orderMaster.getPayStatus().equals(PayStatusEnum.WAIT.getCode())){
+            log.error("【订单支付】订单已支付无需重复支付");
+            throw new SellException(ResultEnum.ORDER_ALREADY_PAY);
+        }
+        //只有新订单才可以支付
+        if(!orderMaster.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())){
+            log.error("【订单支付】订单已过期");
+            throw new SellException(ResultEnum.ORDER_TIMEOUT);
+        }
+        orderMaster.setOrderStatus(OrderStatusEnum.FINISH.getCode());
         orderMaster.setPayStatus(PayStatusEnum.SUCCESS.getCode());
-        return null;
+        OrderMaster result = orderMasterRepository.save(orderMaster);
+        if(result == null){
+            log.error("【订单支付】orderMaster{}", orderMaster);
+            throw new SellException(ResultEnum.ORDER_PAY_ERROR);
+        }
+        orderDto.setPayStatus(PayStatusEnum.SUCCESS.getCode());
+        return orderDto;
     }
 }

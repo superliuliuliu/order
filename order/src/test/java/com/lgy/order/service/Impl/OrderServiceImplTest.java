@@ -31,18 +31,18 @@ public class OrderServiceImplTest {
     public void create() {
         //在这里模拟测试前端想后端返回订单的数据信息
         OrderDto orderDto = new OrderDto();
-        orderDto.setBuyerAddress("河南省平顶山市新华区新七街");
-        orderDto.setBuyerName("刘倩");
-        orderDto.setBuyerPhone("13781846189");
-        orderDto.setBuyerOpenid("734190427");
+        orderDto.setBuyerAddress("四川省成都市成华区建设北路东二段");
+        orderDto.setBuyerName("刘阮洋");
+        orderDto.setBuyerPhone("15938919976");
+        orderDto.setBuyerOpenid("734190420");
 
         List<OrderDetail> orderDetailList = new ArrayList<>();
         OrderDetail o1 = new OrderDetail();
-        o1.setProductId("41040219971108");
+        o1.setProductId("41040219971106");
         o1.setProductQuantity(2);
         OrderDetail o2 = new OrderDetail();
-        o2.setProductId("41040219971109");
-        o2.setProductQuantity(1);
+        o2.setProductId("41040219971108");
+        o2.setProductQuantity(3);
         orderDetailList.add(o1);
         orderDetailList.add(o2);
 
@@ -65,19 +65,22 @@ public class OrderServiceImplTest {
 
     @Test
     public void cancel() {
-        OrderDto orderDto = orderService.findOne("41040219975559");
+        OrderDto orderDto = orderService.findOne("8561901553091610362");
         orderDto = orderService.cancel(orderDto);
         logger.info("【取消订单】 order={}", orderDto);
     }
 
     @Test
     public void finish() {
-        OrderDto orderDto = orderService.findOne("41040219975559");
+        OrderDto orderDto = orderService.findOne("8561901553091610362");
         orderDto = orderService.finish(orderDto);
         logger.info("【完结订单】 order={}", orderDto);
     }
 
     @Test
     public void paid() {
+        OrderDto orderDto = orderService.findOne("2117491553092807239");
+        orderDto = orderService.paid(orderDto);
+        logger.info("【支付订单】 order={}", orderDto);
     }
 }
