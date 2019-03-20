@@ -20,6 +20,11 @@ public enum ResultEnum {
     PRODUCT_STOCK_ERROR(11, "商品库存错误"),
     ORDER_NOT_EXIST(12, "订单不存在"),
     ORDER_DETAIL_NOT_EXIST(13, "订单详情不存在"),
+    ORDER_STATE_ERROR(14, "订单状态不正确"),
+    ORDER_UPDATE_ERROR(15, "订单更新失败"),
+    ORDER_DETAIL_NULL(16, "订单详情为空"),
+    ORDER_FINISH_ERROR(17, "订单完结失败"),
+    ORDER_ALREADY_FINISH(18, "订单重复完结")
     ;
 
     private Integer code;
