@@ -2,7 +2,6 @@ package com.lgy.order.VO;
 
 import lombok.Data;
 
-import javax.persistence.criteria.CriteriaBuilder;
 
 /**
  * ResultVo
