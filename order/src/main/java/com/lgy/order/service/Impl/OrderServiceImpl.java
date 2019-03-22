@@ -84,6 +84,7 @@ public class OrderServiceImpl implements OrderService {
                 new CartDto(e.getProductId(), e.getProductQuantity())).collect(Collectors.toList());
 
         productService.decreaseStock(cartDtoList);
+        orderDto.setOrderId(orderId);
         return orderDto;
     }
 
