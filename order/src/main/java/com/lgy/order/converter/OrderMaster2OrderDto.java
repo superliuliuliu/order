@@ -23,14 +23,14 @@ public class OrderMaster2OrderDto {
         throw new IllegalStateException("Utility class");
     }
 
-    private static OrderDto convert(OrderMaster orderMaster){
+    public static OrderDto convert(OrderMaster orderMaster){
         OrderDto orderDto = new OrderDto();
         BeanUtils.copyProperties(orderMaster, orderDto);
         return orderDto;
     }
 
     //
-    private static List<OrderDto> convert(List<OrderMaster> orderMasterList){
+    public static List<OrderDto> convert(List<OrderMaster> orderMasterList){
         return orderMasterList.stream().map(e-> convert(e)).collect(Collectors.toList());
     }
 
