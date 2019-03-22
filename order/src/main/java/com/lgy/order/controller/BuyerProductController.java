@@ -31,8 +31,6 @@ public class BuyerProductController {
 
     @RequestMapping(value = "/list")
     public ResultVo index(){
-        ResultVo resultVo = new ResultVo();
-
         //首先查询所有上架的商品信息
         List<ProductInfo> productInfoList = productService.findOnAll();
 
