@@ -16,6 +16,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -57,7 +59,7 @@ public class BuyerOrderController {
      * @date 2019/3/21 7:54
      * @version 1.0.0
      */
-    @RequestMapping(value = "/create")
+    @PostMapping(value = "/create")
     public ResultVo<Map<String, String>> create(@Valid OrderForm orderForm,
                                                 BindingResult bindingResult){
         //检验提交的表单是否符合要求
