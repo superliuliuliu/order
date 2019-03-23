@@ -1,5 +1,6 @@
 package com.lgy.order.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.lgy.order.dataobject.OrderDetail;
 import lombok.Data;
 
@@ -17,6 +18,7 @@ import java.util.List;
  * @version 1.0.0
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDto {
     private String orderId;
 
