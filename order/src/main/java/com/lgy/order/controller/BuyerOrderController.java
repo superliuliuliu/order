@@ -6,7 +6,7 @@ import com.lgy.order.dto.OrderDto;
 import com.lgy.order.enums.ResultEnum;
 import com.lgy.order.exception.SellException;
 import com.lgy.order.form.OrderForm;
-import com.lgy.order.repository.OrderMasterRepository;
+import com.lgy.order.service.BuyerService;
 import com.lgy.order.service.OrderService;
 import com.lgy.order.util.ResultVoUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +43,7 @@ import java.util.Map;
 public class BuyerOrderController {
 
     @Autowired
-    private OrderMasterRepository orderMasterRepository;
+    private BuyerService buyerService;
 
     @Autowired
     private OrderService orderService;
@@ -64,9 +64,8 @@ public class BuyerOrderController {
             log.error("【创建订单】参数不正确 orderForm={}", orderForm);
             throw new SellException(ResultEnum.PARAM_ERROR.getCode(), bindingResult.getFieldError().getDefaultMessage());
         }
-        OrderDto orderDto = new OrderDto();
         //将orderform中的数据复制到orderDto中
-        orderDto = OrderForm2OrderDto.convert(orderForm);
+        OrderDto orderDto = OrderForm2OrderDto.convert(orderForm);
         //判断订单中的购物车是否为空
         if(CollectionUtils.isEmpty(orderDto.getOrderDetailList())){
             log.error("【创建订单】购物车为空 orderDto={}", orderDto);
@@ -106,8 +105,7 @@ public class BuyerOrderController {
             log.error("【订单详情查询】参数不能为空");
             throw new SellException(ResultEnum.PARAM_ERROR);
         }
-        //TODO 为了防止其他用户伪造orderID查询其他人的订单详情 所以还需要传openid参数
-        OrderDto orderDto = orderService.findOne(orderId);
+        OrderDto orderDto = buyerService.findOrderOne(openid, orderId);
         return ResultVoUtil.success(orderDto);
     }
 
@@ -121,11 +119,8 @@ public class BuyerOrderController {
             log.error("【订单详情查询】参数不能为空");
             throw new SellException(ResultEnum.PARAM_ERROR);
         }
-
-        OrderDto orderDto = orderService.findOne(orderId);
-        orderService.cancel(orderDto);
+        buyerService.cancelOrder(openid, orderId);
         return ResultVoUtil.success();
     }
-
 
 }
