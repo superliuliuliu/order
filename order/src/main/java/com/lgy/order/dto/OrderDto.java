@@ -1,6 +1,5 @@
 package com.lgy.order.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.lgy.order.dataobject.OrderDetail;
 import lombok.Data;
 
@@ -18,7 +17,7 @@ import java.util.List;
  * @version 1.0.0
  */
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
+//@JsonInclude(JsonInclude.Include.NON_NULL)//该注解的作用是 当返回的json数据中有值为空时不返回null的数据 不足之处是该注解只对单个对象有效为了批量配置 我们可以在配置文件中进行配置已实现批量操作
 public class OrderDto {
     private String orderId;
 

@@ -3,6 +3,8 @@ package com.lgy.order.form;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Size;
+
 /**
  * OrderForm
  * 需提交：
@@ -25,6 +27,7 @@ public class OrderForm {
     /**
       * @description 买家手机号
       */
+    @Size(max = 11,min = 11, message = "手机号不正确")
     @NotEmpty(message = "手机号必填")
     private String phone;
 
