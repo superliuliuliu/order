@@ -43,6 +43,8 @@ public enum ResultEnum {
     ORDER_TIMEOUT(21, "订单已过期"),
 
     CART_EMPTY(22, "购物车中无商品"),
+
+    ORDER_AUTH_ERROR(23, "订单权限错误"),
     ;
 
     private Integer code;
