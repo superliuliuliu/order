@@ -2,28 +2,25 @@ package com.lgy.order.controller;
 
 import com.lgy.order.VO.ResultVo;
 import com.lgy.order.converter.OrderForm2OrderDto;
-import com.lgy.order.dataobject.OrderMaster;
 import com.lgy.order.dto.OrderDto;
 import com.lgy.order.enums.ResultEnum;
 import com.lgy.order.exception.SellException;
 import com.lgy.order.form.OrderForm;
 import com.lgy.order.repository.OrderMasterRepository;
 import com.lgy.order.service.OrderService;
-import com.lgy.order.util.KeyUtil;
 import com.lgy.order.util.ResultVoUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -83,6 +80,52 @@ public class BuyerOrderController {
         return ResultVoUtil.success(map);
     }
 
+    /**
+      * @description 订单API 返回用户的订单列表用于用户查询历史订单
+      */
+    @GetMapping(value = "/list")
+    public ResultVo<List<OrderDto>> getOrderList(@RequestParam("openid") String openid,
+                                                 @RequestParam(value = "page", defaultValue = "0") Integer page,
+                                                 @RequestParam(value = "size", defaultValue = "10") Integer size){
+        if (StringUtils.isEmpty(openid)){
+            log.error("【订单列表查询】参数不能为空");
+            throw new SellException(ResultEnum.PARAM_ERROR);
+        }
+        PageRequest pageRequest = new PageRequest(page, size);
+        Page<OrderDto> orderDtoPage = orderService.findList(openid, pageRequest);
+        return ResultVoUtil.success(orderDtoPage.getContent());
+    }
+
+    /**
+      * @description 返回订单的详情信息
+      */
+    @GetMapping(value = "/detail")
+    public ResultVo<OrderDto> getOrderDetail(@RequestParam("openid") String openid,
+                                             @RequestParam("orderId") String orderId){
+        if(StringUtils.isEmpty(openid)|| StringUtils.isEmpty(orderId)){
+            log.error("【订单详情查询】参数不能为空");
+            throw new SellException(ResultEnum.PARAM_ERROR);
+        }
+        //TODO 为了防止其他用户伪造orderID查询其他人的订单详情 所以还需要传openid参数
+        OrderDto orderDto = orderService.findOne(orderId);
+        return ResultVoUtil.success(orderDto);
+    }
+
+    /**
+      * @description 取消订单
+      */
+    @PostMapping(value = "/cancel")
+    public ResultVo<OrderDto> cancel(@RequestParam("openid") String openid,
+                                     @RequestParam("orderId") String orderId){
+        if(StringUtils.isEmpty(openid)|| StringUtils.isEmpty(orderId)){
+            log.error("【订单详情查询】参数不能为空");
+            throw new SellException(ResultEnum.PARAM_ERROR);
+        }
+
+        OrderDto orderDto = orderService.findOne(orderId);
+        orderService.cancel(orderDto);
+        return ResultVoUtil.success();
+    }
 
 
 }

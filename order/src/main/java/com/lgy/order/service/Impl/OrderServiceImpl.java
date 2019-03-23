@@ -62,7 +62,7 @@ public class OrderServiceImpl implements OrderService {
             //将订单详情数据入库
             orderDetail.setDetailId(KeyUtil.getUniqueKey());
             orderDetail.setOrderId(orderId);
-            //将商品信息的属性拷贝到订单详情项中  比如商品名称 商品价格等  TODO存在bug会导致订单详情的创建时间和修改时间异常
+            //将商品信息的属性拷贝到订单详情项中  比如商品名称 商品价格等  使用copyproperties存在bug会导致订单详情的创建时间和修改时间异常
             orderDetail.setProductName(productInfo.getProductName());
             orderDetail.setProductPrice(productInfo.getProductPrice());
             orderDetail.setProductIcon(productInfo.getProductIcon());
@@ -72,11 +72,12 @@ public class OrderServiceImpl implements OrderService {
         }
         //接着将数据写入订单数据库
         OrderMaster orderMaster = new OrderMaster();
+        
+        orderDto.setPayStatus(PayStatusEnum.WAIT.getCode());
+        orderDto.setOrderStatus(OrderStatusEnum.NEW.getCode());
+        orderDto.setOrderId(orderId);
+        orderDto.setOrderAmount(orderAmount);
         BeanUtils.copyProperties(orderDto, orderMaster);
-        orderMaster.setPayStatus(PayStatusEnum.WAIT.getCode());
-        orderMaster.setOrderStatus(OrderStatusEnum.NEW.getCode());
-        orderMaster.setOrderId(orderId);
-        orderMaster.setOrderAmount(orderAmount);
         orderMasterRepository.save(orderMaster);
 
         //进行库存的更改
@@ -84,7 +85,6 @@ public class OrderServiceImpl implements OrderService {
                 new CartDto(e.getProductId(), e.getProductQuantity())).collect(Collectors.toList());
 
         productService.decreaseStock(cartDtoList);
-        orderDto.setOrderId(orderId);
         return orderDto;
     }
 
