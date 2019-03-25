@@ -1,6 +1,8 @@
 package com.lgy.order.service.Impl;
 
+import com.google.gson.Gson;
 import com.lgy.order.dataobject.ProductInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +18,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Slf4j
 public class ProductServiceImplTest {
 
     @Autowired
@@ -42,7 +45,28 @@ public class ProductServiceImplTest {
 
     }
 
+    /**
+      * @description 基本数据类型解析测试
+      */
     @Test
     public void save() {
+        Gson gson = new Gson();
+        int i  = gson.fromJson("100", int.class);
+        double d = gson.fromJson("99.99", double.class);
+        boolean b = gson.fromJson("true", boolean.class);
+        String str = gson.fromJson("string", String.class);
+        log.info("【Gson测试】i={}, d={}, b={}, str={}", i, d, b, str);
     }
+
+    /**
+      * @description 基本数据类型生成
+      */
+    @Test
+    public void save1() {
+        Gson gson = new Gson();
+        int[] values = {1,2};
+        String str = gson.toJson(values);
+        log.info("ceshi:{}",str);
+    }
+
 }

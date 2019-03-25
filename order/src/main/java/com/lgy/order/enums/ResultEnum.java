@@ -45,6 +45,8 @@ public enum ResultEnum {
     CART_EMPTY(22, "购物车中无商品"),
 
     ORDER_AUTH_ERROR(23, "订单权限错误"),
+
+    WECHAT_MP_ERROR(24, "微信授权出错"),
     ;
 
     private Integer code;
