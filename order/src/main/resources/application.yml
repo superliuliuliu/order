@@ -1,6 +1,8 @@
 spring:
   profiles:
     active: dev
+  mvc:
+    static-path-pattern: /static/**
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8 #日期序列化走北京时间
