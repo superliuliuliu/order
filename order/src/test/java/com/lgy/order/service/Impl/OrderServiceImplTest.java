@@ -64,6 +64,12 @@ public class OrderServiceImplTest {
     }
 
     @Test
+    public void findList2(){
+        Page<OrderDto> orderDtoPage = orderService.findList(new PageRequest(0,5));
+        logger.info("result:{}" , orderDtoPage);
+    }
+
+    @Test
     public void cancel() {
         OrderDto orderDto = orderService.findOne("8561901553091610362");
         orderDto = orderService.cancel(orderDto);
