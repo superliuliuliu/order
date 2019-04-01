@@ -13,6 +13,5 @@ import com.lgy.order.dto.OrderDto;
  */
 public interface PayService {
 
-
     void create(OrderDto orderDto);
 }

@@ -43,6 +43,15 @@ public class OrderServiceImpl implements OrderService {
     private OrderMasterRepository orderMasterRepository;
 
     //新建订单的实现类 @Transactional事务操作 当抛出异常时数据库操作会回滚
+    /**
+     * create
+     * @description 新建订单 对应顾客的下单操作
+     * @param orderDto 顾客下单的信息 从前端返回  一般含有商品ID 商品数量 顾客信息等内容
+     * @return com.lgy.order.dto.OrderDto
+     * @author liugaoyang
+     * @date 2019/4/1 14:31
+     * @version 1.0.0
+     */
     @Override
     @Transactional
     public OrderDto create(OrderDto orderDto) {
@@ -88,6 +97,15 @@ public class OrderServiceImpl implements OrderService {
         return orderDto;
     }
 
+    /**
+     * findOne
+     * @description 根据订单ID来查询订单信息
+     * @param orderId 订单的唯一ID
+     * @return com.lgy.order.dto.OrderDto
+     * @author liugaoyang
+     * @date 2019/4/1 14:30
+     * @version 1.0.0
+     */
     @Override
     public OrderDto findOne(String orderId) {
         OrderMaster orderMaster = orderMasterRepository.findOne(orderId);
@@ -105,12 +123,36 @@ public class OrderServiceImpl implements OrderService {
         return orderDto;
     }
 
-    //查询订单列表
+    /**
+     * findList
+     * @description 根据买家id来查询历史订单
+     * @param buyerOpenid 买家openid pageable 数据分页格式
+     * @return Page<OrderDto>
+     * @author liugaoyang
+     * @date 2019/4/1 14:28
+     * @version 1.0.0
+     */
     @Override
     public Page<OrderDto> findList(String buyerOpenid, Pageable pageable) {
         Page<OrderMaster> orderMasterPage = orderMasterRepository.findByBuyerOpenid(buyerOpenid, pageable);
         List<OrderDto> orderDtoList = OrderMaster2OrderDto.convert(orderMasterPage.getContent());
-        return new PageImpl<>(orderDtoList, pageable,orderMasterPage.getTotalElements());
+        return new PageImpl<>(orderDtoList, pageable, orderMasterPage.getTotalElements());
+    }
+
+    /**
+     * findList
+     * @description 商家订单后台管理系统查询订单列表
+     * @param pageable 分页数据规格
+     * @return org.springframework.data.domain.Page<com.lgy.order.dto.OrderDto>
+     * @author liugaoyang
+     * @date 2019/4/1 14:28
+     * @version 1.0.0
+     */
+    @Override
+    public Page<OrderDto> findList(Pageable pageable) {
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findAll(pageable);
+        List<OrderDto> orderDtoList = OrderMaster2OrderDto.convert(orderMasterPage.getContent());
+        return new PageImpl<>(orderDtoList, pageable, orderMasterPage.getTotalElements());
     }
 
     /**

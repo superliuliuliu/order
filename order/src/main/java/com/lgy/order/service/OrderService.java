@@ -13,8 +13,11 @@ public interface OrderService {
     //查询单个订单
     OrderDto findOne(String orderId);
 
-    //查询订单(查询历史订单：通过用户id来表示、查询未支付订单)
+    //查询订单(用户用来查询自己的历史订单：通过用户id来表示、查询未支付订单)
     Page<OrderDto> findList(String buyerOpenid, Pageable pageable);
+
+    //卖家查询订单列表 用于卖家管理
+    Page<OrderDto> findList(Pageable pageable);
 
     //取消订单  对应修改订单的状态码即可
     OrderDto cancel(OrderDto orderDto);
