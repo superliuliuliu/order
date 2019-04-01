@@ -31,7 +31,7 @@ public class SellerOrderController {
 
     /**
      * list
-     * @description
+     * @description 所有的订单数据列表  支持根据顾客姓名查找  根据顾客手机号查找订单信息
      * @param page 分页数据第几页 前端显示从第一页开始 而pageable中是包含0下标的
      * @param size 一页包含几条数据
      * @return org.springframework.web.servlet.ModelAndView
