@@ -123,6 +123,16 @@ public class OrderServiceImpl implements OrderService {
         return orderDto;
     }
 
+    @Override
+    public Page<OrderDto> findListByPhone(String phone, Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public Page<OrderDto> findListByName(String name, Pageable pageable) {
+        return null;
+    }
+
     /**
      * findList
      * @description 根据买家id来查询历史订单

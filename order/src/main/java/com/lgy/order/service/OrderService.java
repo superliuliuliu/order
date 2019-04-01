@@ -13,6 +13,12 @@ public interface OrderService {
     //查询单个订单
     OrderDto findOne(String orderId);
 
+    //根据手机号码查询订单信息(支持模糊查询)
+    Page<OrderDto> findListByPhone(String phone, Pageable pageable);
+
+    //根据顾客姓名查询订单信息(支持模糊查询)
+    Page<OrderDto> findListByName(String name, Pageable pageable);
+
     //查询订单(用户用来查询自己的历史订单：通过用户id来表示、查询未支付订单)
     Page<OrderDto> findList(String buyerOpenid, Pageable pageable);
 
