@@ -99,12 +99,52 @@
                             <td>${orderDto.createTime}</td>
                             <td>
                                 <button class="btn btn-default btn-sm edit-carousel-btn">详情</button>
+                                <#if orderDto.orderStatus==0>
                                 <button class="btn btn-danger btn-sm delete-carousel-btn">取消</button>
+                                </#if>
                             </td>
                         </tr>
                     </#list>
                     </tbody>
                 </table>
+                <nav aria-label="Page navigation" style="margin-left: 500px">
+                    <ul class="pagination pagination-lg">
+                        <#if currentPage lte 1>
+                        <li class="disabled">
+                            <a href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <#else>
+                        <li>
+                            <a href="/sell/seller/order/list?page=${currentPage-1}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        </#if>
+                        <#list 1..orderDtoPage.getTotalPages() as index>
+                            <#if currentPage==index>
+                                <li class="disabled"><a href="#">${index}</a></li>
+                            <#else>
+                                <li><a href="/sell/seller/order/list?page=${index}">${index}</a></li>
+                            </#if>
+                        </#list>
+                        <#if currentPage gte orderDtoPage.getTotalPages()>
+                            <li class="disabled">
+                                <a href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        <#else>
+                            <li>
+                                <a href="/sell/seller/order/list?page=${currentPage + 1}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </#if>
+
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

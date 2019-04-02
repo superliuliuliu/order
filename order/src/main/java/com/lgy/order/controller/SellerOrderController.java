@@ -41,12 +41,13 @@ public class SellerOrderController {
      */
     @GetMapping(value = "/list")
     public ModelAndView list(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                             @RequestParam(value = "size", defaultValue = "10") Integer size,
+                             @RequestParam(value = "size", defaultValue = "8") Integer size,
                              Map<String, Object> map){
         PageRequest pageRequest = new PageRequest(page - 1, size);
         // 查询的分页的主订单数据
         Page<OrderDto> orderDtoPage = orderService.findList(pageRequest);
         map.put("orderDtoPage", orderDtoPage);
+        map.put("currentPage", page);
         return new ModelAndView("order/list", map);
     }
 
