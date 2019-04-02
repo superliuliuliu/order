@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -123,14 +124,38 @@ public class OrderServiceImpl implements OrderService {
         return orderDto;
     }
 
+    /**
+     * findListByPhone
+     * @description 支持商家在后台管理系统中输入电话号码进行模糊查询
+     * @param phone 手机号码
+     * @param pageable 数据分页格式
+     * @return org.springframework.data.domain.Page<com.lgy.order.dto.OrderDto>
+     * @author liugaoyang
+     * @date 2019/4/2 10:03
+     * @version 1.0.0
+     */
     @Override
     public Page<OrderDto> findListByPhone(String phone, Pageable pageable) {
-        return null;
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findByPhone(phone, pageable);
+        List<OrderDto> orderDtoList = OrderMaster2OrderDto.convert(orderMasterPage.getContent());
+        return new PageImpl<>(orderDtoList, pageable, orderMasterPage.getTotalElements());
     }
 
+    /**
+     * findListByName
+     * @description 支持商家在后台管理系统中输入顾客姓名进行模糊查询
+     * @param name 顾客姓名
+     * @param pageable 数据分页格式
+     * @return org.springframework.data.domain.Page<com.lgy.order.dto.OrderDto>
+     * @author liugaoyang
+     * @date 2019/4/2 10:04
+     * @version 1.0.0
+     */
     @Override
     public Page<OrderDto> findListByName(String name, Pageable pageable) {
-        return null;
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findByBuyerNameLike(name, pageable);
+        List<OrderDto> orderDtoList = OrderMaster2OrderDto.convert(orderMasterPage.getContent());
+        return new PageImpl<>(orderDtoList, pageable, orderMasterPage.getTotalElements());
     }
 
     /**

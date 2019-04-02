@@ -65,7 +65,13 @@ public class OrderServiceImplTest {
 
     @Test
     public void findList2(){
-        Page<OrderDto> orderDtoPage = orderService.findList(new PageRequest(0,5));
+        Page<OrderDto> orderDtoPage = orderService.findListByPhone("137",new PageRequest(0,5));
+        logger.info("result:{}" , orderDtoPage);
+    }
+
+    @Test
+    public void findList3(){
+        Page<OrderDto> orderDtoPage = orderService.findListByName("李", new PageRequest(0,5));
         logger.info("result:{}" , orderDtoPage);
     }
 
