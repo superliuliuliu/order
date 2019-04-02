@@ -1,6 +1,10 @@
 package com.lgy.order.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lgy.order.dataobject.OrderDetail;
+import com.lgy.order.enums.OrderStatusEnum;
+import com.lgy.order.enums.PayStatusEnum;
+import com.lgy.order.util.EnumUtil;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -45,4 +49,14 @@ public class OrderDto {
 
     /**对应的是商品详情信息的ID*/
     List<OrderDetail> orderDetailList;
+
+    @JsonIgnore
+    public OrderStatusEnum getOrderStatusEnum(){
+        return EnumUtil.getByCode(orderStatus, OrderStatusEnum.class);
+    }
+
+    @JsonIgnore
+    public PayStatusEnum getPayStatusEnum(){
+        return EnumUtil.getByCode(payStatus, PayStatusEnum.class);
+    }
 }

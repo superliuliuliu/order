@@ -14,11 +14,11 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum  OrderStatusEnum {
+public enum  OrderStatusEnum implements CodeEnums{
 
     NEW(0, "新订单"),
-    FINISH(1, "已完成的订单"),
-    CANCEL(2, "订单已被取消");
+    FINISH(1, "已完结"),
+    CANCEL(2, "已取消");
     private Integer code;
     private String message;
 

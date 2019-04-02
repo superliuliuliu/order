@@ -14,10 +14,10 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum PayStatusEnum {
+public enum PayStatusEnum implements CodeEnums{
 
     WAIT(0, "未支付"),
-    SUCCESS(1, "支付成功");
+    SUCCESS(1, "已支付");
     private Integer code;
     private String message;
 }

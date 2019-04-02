@@ -94,8 +94,8 @@
                             <td>${orderDto.buyerPhone}</td>
                             <td>${orderDto.buyerAddress}</td>
                             <td>${orderDto.orderAmount}</td>
-                            <td>${orderDto.orderStatus}</td>
-                            <td>${orderDto.payStatus}</td>
+                            <td>${orderDto.orderStatusEnum.getMessage()}</td>
+                            <td>${orderDto.payStatusEnum.getMessage()}</td>
                             <td>${orderDto.createTime}</td>
                             <td>
                                 <button class="btn btn-default btn-sm edit-carousel-btn">详情</button>
