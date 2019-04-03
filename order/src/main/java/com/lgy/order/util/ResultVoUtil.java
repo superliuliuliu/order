@@ -17,7 +17,7 @@ public class ResultVoUtil {
     public static ResultVo success(Object object){
         ResultVo resultVo = new ResultVo();
         resultVo.setCode(0);
-        resultVo.setMessage("成功");
+        resultVo.setMessage("操作成功");
         resultVo.setData(object);
         return resultVo;
     }
@@ -32,7 +32,7 @@ public class ResultVoUtil {
         ResultVo resultVo = new ResultVo();
         resultVo.setCode(code);
         resultVo.setMessage(message);
-        return  resultVo;
+        return resultVo;
     }
 
 }

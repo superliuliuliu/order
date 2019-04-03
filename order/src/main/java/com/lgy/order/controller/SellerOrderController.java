@@ -1,15 +1,15 @@
 package com.lgy.order.controller;
 
+import com.lgy.order.VO.ResultVo;
 import com.lgy.order.dto.OrderDto;
 import com.lgy.order.service.OrderService;
+import com.lgy.order.util.ResultVoUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
@@ -53,7 +53,7 @@ public class SellerOrderController {
 
     /**
      * detail
-     * @description
+     * @description 订单详情API 获取订单的详细商品信息(商品数量以及商品价格) 以sweetalert弹框的形式弹出订单的详细信息
      * @param
      * @return org.springframework.web.servlet.ModelAndView
      * @author liugaoyang
@@ -61,7 +61,22 @@ public class SellerOrderController {
      * @version 1.0.0
      */
     @GetMapping(value = "/detail")
-    public ModelAndView detail(){
-        return new ModelAndView();
+    public ResultVo detail(@RequestParam(value = "orderId") String orderId){
+        return ResultVoUtil.success();
+    }
+
+    /**
+     * cancelOrder
+     * @description 取消订单(卖家原因取消订单)
+     * @param orderId 订单Id 订单的唯一标识
+     * @return org.springframework.web.servlet.ModelAndView
+     * @author liugaoyang
+     * @date 2019/4/3 17:47
+     * @version 1.0.0
+     */
+    @ResponseBody
+    @GetMapping(value = "/cancel")
+    public ResultVo cancelOrder(@RequestParam(value = "orderId") String orderId){
+        return ResultVoUtil.success();
     }
 }
