@@ -1,7 +1,9 @@
 package com.lgy.order.controller;
 
 import com.lgy.order.VO.ResultVo;
+import com.lgy.order.dataobject.OperationResult;
 import com.lgy.order.dto.OrderDto;
+import com.lgy.order.exception.SellException;
 import com.lgy.order.service.OrderService;
 import com.lgy.order.util.ResultVoUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -77,6 +79,14 @@ public class SellerOrderController {
     @ResponseBody
     @GetMapping(value = "/cancel")
     public ResultVo cancelOrder(@RequestParam(value = "orderId") String orderId){
-        return ResultVoUtil.success();
+        try{
+            OrderDto orderDto = orderService.findOne(orderId);
+            orderService.cancel(orderDto);
+        }catch (SellException e){
+            log.error("【取消订单】发生异常{}",e);
+            return ResultVoUtil.error(1, e.getMessage());
+        }
+
+        return ResultVoUtil.success(new OperationResult(200, "成功取消订单"));
     }
 }

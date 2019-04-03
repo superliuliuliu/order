@@ -98,9 +98,9 @@
                             <td>${orderDto.payStatusEnum.getMessage()}</td>
                             <td>${orderDto.createTime}</td>
                             <td>
-                                <button class="btn btn-default btn-sm edit-carousel-btn">详情</button>
+                                <button class="btn btn-default btn-sm edit-carousel-btn" id="detail-btn">详情</button>
                                 <#if orderDto.orderStatus==0>
-                                <button class="btn btn-danger btn-sm delete-carousel-btn">取消</button>
+                                <button class="btn btn-danger btn-sm delete-carousel-btn" id="cancel-btn">取消</button>
                                 </#if>
                             </td>
                         </tr>
@@ -153,6 +153,8 @@
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../static/js/jquery.min.js"><\/script>')</script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="../../static/js/order/test.js"></script>
 <script src="../../static/js/holder.min.js"></script>
 </body>
 </html>
