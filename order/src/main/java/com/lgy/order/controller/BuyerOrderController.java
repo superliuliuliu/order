@@ -85,7 +85,7 @@ public class BuyerOrderController {
     @GetMapping(value = "/list")
     public ResultVo<List<OrderDto>> getOrderList(@RequestParam("openid") String openid,
                                                  @RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                 @RequestParam(value = "size", defaultValue = "10") Integer size){
+                                                 @RequestParam(value = "size", defaultValue = "6") Integer size){
         if (StringUtils.isEmpty(openid)){
             log.error("【订单列表查询】参数不能为空");
             throw new SellException(ResultEnum.PARAM_ERROR);
