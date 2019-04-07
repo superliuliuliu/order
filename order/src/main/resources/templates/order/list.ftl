@@ -14,6 +14,8 @@
 
     <!-- Custom styles for this template -->
     <link href="../../static/css/dashboard.css" rel="stylesheet">
+    <link href="../../static/css/sweetalert.css" rel="stylesheet">
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -51,8 +53,8 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">订单信息 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Reports</a></li>
+                <li class="active"><a href="/sell/seller/order/list">订单信息 <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">订单详情</a></li>
                 <li><a href="#">Analytics</a></li>
                 <li><a href="#">Export</a></li>
             </ul>
@@ -88,7 +90,7 @@
                     </thead>
                     <tbody>
                     <#list orderDtoPage.content as orderDto>
-                        <tr>
+                        <tr data-id="${orderDto.orderId}">
                             <td>${orderDto.orderId}</td>
                             <td>${orderDto.buyerName}</td>
                             <td>${orderDto.buyerPhone}</td>
@@ -98,9 +100,11 @@
                             <td>${orderDto.payStatusEnum.getMessage()}</td>
                             <td>${orderDto.createTime}</td>
                             <td>
-                                <button class="btn btn-default btn-sm edit-carousel-btn" id="detail-btn">详情</button>
+                                <a href="/sell/seller/order/detail?orderId=${orderDto.orderId}">
+                                    <button class="btn btn-default btn-sm order-detail-btn">详情</button>
+                                </a>
                                 <#if orderDto.orderStatus==0>
-                                <button class="btn btn-danger btn-sm delete-carousel-btn" id="cancel-btn">取消</button>
+                                <button class="btn btn-danger btn-sm order-delete-btn">取消</button>
                                 </#if>
                             </td>
                         </tr>
@@ -153,8 +157,10 @@
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../static/js/jquery.min.js"><\/script>')</script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="../../static/js/order/test.js"></script>
+<script src="../../static/js/sweetalert.min.js"></script>
+<script src="../../static/js/myalert.js"></script>
+<script src="../../static/js/myajax.js"></script>
+<script src="../../static/js/order/order.js"></script>
 <script src="../../static/js/holder.min.js"></script>
 </body>
 </html>

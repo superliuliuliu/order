@@ -18,9 +18,7 @@ import com.lgy.order.util.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -184,7 +182,10 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public Page<OrderDto> findList(Pageable pageable) {
-        Page<OrderMaster> orderMasterPage = orderMasterRepository.findAll(pageable);
+        //根据订单的创建时间排序  逆序排序大的在前面 即新创建的订单排列在前面
+        Sort sort = new Sort(Sort.Direction.DESC, "createTime");
+        Pageable sortPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), sort);
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findAll(sortPageable);
         List<OrderDto> orderDtoList = OrderMaster2OrderDto.convert(orderMasterPage.getContent());
         return new PageImpl<>(orderDtoList, pageable, orderMasterPage.getTotalElements());
     }

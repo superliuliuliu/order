@@ -1,7 +1,9 @@
 package com.lgy.order.exception;
 
 import com.lgy.order.enums.ResultEnum;
+import lombok.Data;
 
+@Data
 public class SellException extends RuntimeException{
 
     private Integer code;
