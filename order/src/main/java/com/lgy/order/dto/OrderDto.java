@@ -50,6 +50,7 @@ public class OrderDto {
     /**对应的是商品详情信息的ID*/
     List<OrderDetail> orderDetailList;
 
+    /**根据订单数据库中存储的码值获取枚举类中的实体*/
     @JsonIgnore
     public OrderStatusEnum getOrderStatusEnum(){
         return EnumUtil.getByCode(orderStatus, OrderStatusEnum.class);

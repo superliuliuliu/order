@@ -4,9 +4,13 @@ import com.lgy.order.enums.CodeEnums;
 
 public class EnumUtil {
 
+    private EnumUtil() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /**
      * getByCode
-     * 首先要对泛型T进行限制  必须是实现了CodeEnums接口的类
+     *
      * @description 根据code获取枚举类实体
      * @param code code值
      * @enumClass 哪一个枚举类

@@ -1,6 +1,7 @@
 package com.lgy.order.util;
 
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * KeyUtil
@@ -21,5 +22,10 @@ public class KeyUtil {
     public static synchronized String getUniqueKey(){
         Integer number = new Random().nextInt(900000) + 100000;
         return  System.currentTimeMillis() + String.valueOf(number) ;
+    }
+
+    //生成唯一的UUID
+    public static synchronized String getUUID(){
+        return UUID.randomUUID().toString().replace("-", "");
     }
 }
