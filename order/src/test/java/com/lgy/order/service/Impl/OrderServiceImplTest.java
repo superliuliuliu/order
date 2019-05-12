@@ -38,13 +38,13 @@ public class OrderServiceImplTest {
 
         List<OrderDetail> orderDetailList = new ArrayList<>();
         OrderDetail o1 = new OrderDetail();
-        o1.setProductId("41040219971107");
+        o1.setProductId("41040219971108");
         o1.setProductQuantity(1);
-        OrderDetail o2 = new OrderDetail();
-        o2.setProductId("41040219971106");
-        o2.setProductQuantity(1);
+//        OrderDetail o2 = new OrderDetail();
+//        o2.setProductId("41040219971106");
+//        o2.setProductQuantity(1);
         orderDetailList.add(o1);
-        orderDetailList.add(o2);
+//        orderDetailList.add(o2);
 
         orderDto.setOrderDetailList(orderDetailList);
         OrderDto result = orderService.create(orderDto);

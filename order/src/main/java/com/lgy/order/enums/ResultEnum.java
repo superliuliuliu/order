@@ -22,6 +22,8 @@ public enum ResultEnum {
 
     PRODUCT_STOCK_ERROR(11, "商品库存错误"),
 
+    PRODUCT_STATUS_ERROR(25, "商品状态错误"),
+
     ORDER_NOT_EXIST(12, "订单不存在"),
 
     ORDER_DETAIL_NOT_EXIST(13, "订单详情不存在"),

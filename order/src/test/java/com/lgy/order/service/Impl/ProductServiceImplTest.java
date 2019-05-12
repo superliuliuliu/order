@@ -45,6 +45,13 @@ public class ProductServiceImplTest {
 
     }
 
+    @Test
+    public void down(){
+        ProductInfo productInfo = productService.findOne("41040219971106");
+        productService.obtain(productInfo);
+        System.out.println(productInfo);
+    }
+
     /**
       * @description 基本数据类型解析测试
       */

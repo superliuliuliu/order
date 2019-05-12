@@ -7,6 +7,7 @@ import com.lgy.order.enums.ResultEnum;
 import com.lgy.order.exception.SellException;
 import com.lgy.order.repository.ProductInfoRepository;
 import com.lgy.order.service.ProductService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
@@ -34,11 +36,45 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductInfo> findOnAll() {
         return productInfoRepository.findByProductStatus(ProductStatusEnum.UP.getCode());
-    }
+}
 
     @Override
     public ProductInfo save(ProductInfo productInfo) {
         return productInfoRepository.save(productInfo);
+    }
+
+    @Override
+    @Transactional
+    public ProductInfo obtain(ProductInfo productInfo) {
+        String productId = productInfo.getProductId();
+        ProductInfo productInfo1 = productInfoRepository.findOne(productId);
+        if (productInfo1 == null){
+            log.error("【更新商品上下架】此商品不存在");
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        if (productInfo1.getProductStatus().equals(ProductStatusEnum.DOWN)){
+            log.error("【更新商品上下架】商品已处于下架状态");
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        productInfo1.setProductStatus(ProductStatusEnum.DOWN.getCode());
+        return productInfo1;
+    }
+
+    @Override
+    @Transactional
+    public ProductInfo Shelf(ProductInfo productInfo) {
+        String productId = productInfo.getProductId();
+        ProductInfo productInfo1 = productInfoRepository.findOne(productId);
+        if (productInfo1 == null){
+            log.error("【更新商品上下架】此商品不存在");
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        if (productInfo1.getProductStatus().equals(ProductStatusEnum.UP)){
+            log.error("【更新商品上下架】商品已处于上架状态");
+            throw new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        productInfo1.setProductStatus(ProductStatusEnum.UP.getCode());
+        return productInfo1;
     }
 
     @Override

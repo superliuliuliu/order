@@ -122,8 +122,10 @@ public class SellerOrderController {
             orderService.finish(orderDto);
         }catch (SellException e){
             log.error("【订单管理】完结订单异常{}", e);
+            return ResultVoUtil.error(e.getCode(), e.getMessage());
         }
         return ResultVoUtil.success(new OperationResult(200, "成功完结订单"));
     }
+
 
 }
