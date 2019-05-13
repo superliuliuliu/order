@@ -3,17 +3,24 @@ package com.lgy.order.controller;
 import com.lgy.order.VO.ResultVo;
 import com.lgy.order.dataobject.OperationResult;
 import com.lgy.order.dataobject.ProductInfo;
+import com.lgy.order.enums.ProductStatusEnum;
+import com.lgy.order.enums.ResultEnum;
 import com.lgy.order.exception.SellException;
+import com.lgy.order.form.ProductForm;
 import com.lgy.order.service.ProductService;
+import com.lgy.order.util.KeyUtil;
 import com.lgy.order.util.ResultVoUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
@@ -94,5 +101,37 @@ public class SellerProductController {
             return ResultVoUtil.error(e.getCode(), e.getMessage());
         }
         return ResultVoUtil.success(new OperationResult(200, "操作成功"));
+    }
+
+
+    /**
+     * addProduct
+     * @description 新增商品  默认上架状态
+     * @param
+     * @return com.lgy.order.VO.ResultVo
+     * @author liugaoyang
+     * @date 2019/5/12 17:22
+     * @version 1.0.0
+     */
+    @ResponseBody
+    @PostMapping("/add")
+    public ResultVo addProduct(@Valid ProductForm productForm,
+                               BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            log.error("【创建商品】参数不正确 ProductForm={}", productForm);
+            throw new SellException(ResultEnum.PARAM_ERROR.getCode(), bindingResult.getFieldError().getDefaultMessage());
+        }
+        ProductInfo productInfo = new ProductInfo();
+        productInfo.setProductId(KeyUtil.getUUID());
+        BeanUtils.copyProperties(productForm, productInfo);
+        productInfo.setProductStatus(ProductStatusEnum.UP.getCode());
+
+        try{
+            productService.save(productInfo);
+        }catch (SellException e){
+            log.error("【创建商品】：{}", e);
+            return ResultVoUtil.error(e.getCode(), e.getMessage());
+        }
+        return ResultVoUtil.success(new OperationResult(200, "新增商品信息成功！"));
     }
 }

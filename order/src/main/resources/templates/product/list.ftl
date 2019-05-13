@@ -11,7 +11,7 @@
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <div class="button-group">
-                <button type="button" class="btn btn-success btn-lg">新增</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target=".add-modal">新增</button>
             </div>
             <div class="row clearfix">
                 <#--<h2 class="page-header">订单列表</h2>-->
@@ -34,6 +34,8 @@
                         <tbody>
                         <#list productInfos.content as productInfo>
                             <tr data-id="${productInfo.productId}">
+                                <#--data-name="${productInfo.productName}" data-url="${productInfo.productIcon}" data-price="${productInfo.productPrice}"-->
+                                <#--data-stock="${productInfo.productStock}" data-desc="${productInfo.productDescription}" data-category="${productInfo.categoryType}"-->
                                 <td>${productInfo.productId}</td>
                                 <td>${productInfo.productName}</td>
                                 <td>
@@ -110,6 +112,63 @@
                             </#if>
                         </ul>
                     </nav>
+                    <#--新增编辑模态框-->
+                    <div class="modal fade add-modal" id="add-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <#--模态框头部-->
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">商品</h4>
+                                </div>
+                                <#--模态框表单-->
+                                <div class="modal-body">
+                                    <form class="form-horizontal" action="">
+                                        <div class="form-group">
+                                            <label for="productName" class="col-sm-2 control-label">商品名称:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="productName" placeholder="商品名称">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="url" class="col-sm-2 control-label">图片地址:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="url" placeholder="图片地址">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="productPrice" class="col-sm-2 control-label">商品单价:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="productPrice" placeholder="价格">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="productStock" class="col-sm-2 control-label">商品库存:</label>
+                                            <div class="col-sm-10">
+                                                <input type="number" class="form-control" id="productStock" placeholder="Weight">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="productDesc" class="col-sm-2 control-label">商品介绍:</label>
+                                            <div class="col-sm-10">
+                                                <textarea class="form-control" id="productDesc" placeholder="介绍一下本商品"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="categoryType" class="col-sm-2 control-label">商品类目:</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="categoryType" placeholder="商品类目">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-primary btn-sm " id="product-add-btn">新增</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
