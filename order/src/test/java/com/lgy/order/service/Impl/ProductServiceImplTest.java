@@ -2,10 +2,12 @@ package com.lgy.order.service.Impl;
 
 import com.google.gson.Gson;
 import com.lgy.order.dataobject.ProductInfo;
+import com.lgy.order.form.ProductForm;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
@@ -50,6 +52,16 @@ public class ProductServiceImplTest {
         ProductInfo productInfo = productService.findOne("41040219971106");
         productService.obtain(productInfo);
         System.out.println(productInfo);
+    }
+
+    @Test
+    public void update(){
+        ProductInfo productInfo = productService.findOne("41040219971106");
+        ProductForm productForm = new ProductForm();
+        BeanUtils.copyProperties(productInfo, productForm);
+        productForm.setProductName("寂寞凉面修改测试");
+        productService.update(productForm);
+
     }
 
     /**

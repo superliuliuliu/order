@@ -72,7 +72,7 @@ $(function () {
     $("#product-add-btn").click(function (event) {
         event.preventDefault();
 
-        var dialog = $("#adddialog");
+        var dialog = $("#add-dialog");
         var productNameE = dialog.find("#productName");
         var urlE = dialog.find("#url");
         var productPriceE = dialog.find("#productPrice");
@@ -87,31 +87,33 @@ $(function () {
         var productDesc = productDescE.val();
         var category = categoryTypeE.val();
 
-        myajax.post({
-            'url': '/sell/seller/product/add',
-            'data':{
+        $.ajax({
+            url: '/sell/seller/product/add',
+            method: 'post',
+            contentType: 'application/json;charset=utf-8',
+            data: JSON.stringify({
                 'productName': productName,
                 'productIcon': productUrl,
                 'productPrice': productPrice,
                 'productStock': productStock,
                 'productDescription': productDesc,
                 'categoryType': category
-            },
-            'success': function(data) {
+            }),
+            dataType: 'JSON',
+            success: function(data) {
                 //提交成功后隐藏对话框
                 dialog.modal("hide");
-                if (data['code'] == 200){
+                if (data['data']['code'] == 200){
                     window.location.reload();//提交成功的话重新加载该页面
                 }
                 else{
-                    var message = data['message'];
+                    var message = data['data']['message'];
                     lgyalert.alertInfo(message);
                 }
             },
-            'fail': function(error) {
+            error: function(error) {
                 lgyalert.alertError("网络错误")
             }
         });
-
     });
 });

@@ -145,7 +145,7 @@
                                         <div class="form-group">
                                             <label for="productStock" class="col-sm-2 control-label">商品库存:</label>
                                             <div class="col-sm-10">
-                                                <input type="number" class="form-control" id="productStock" placeholder="Weight">
+                                                <input type="number" class="form-control" id="productStock" placeholder="库存">
                                             </div>
                                         </div>
                                         <div class="form-group">

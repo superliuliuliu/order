@@ -2,6 +2,7 @@ package com.lgy.order.service;
 
 import com.lgy.order.dataobject.ProductInfo;
 import com.lgy.order.dto.CartDto;
+import com.lgy.order.form.ProductForm;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -17,8 +18,11 @@ public interface ProductService {
     //查询正在上架的所有商品(查询得到的数据可分页)
     List<ProductInfo> findOnAll();
 
-    // 修改商品信息
+    // 新增商品信息
     ProductInfo save(ProductInfo productInfo);
+
+    // 修改商品信息
+    ProductInfo update(ProductForm productForm);
 
     // 商品下架对应修改商品的状态码
     ProductInfo obtain(ProductInfo productInfo);

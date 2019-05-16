@@ -15,7 +15,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -52,7 +54,8 @@ public class SellerProductController {
     public ModelAndView getProductList(@RequestParam(name = "page", defaultValue = "1") Integer page,
                                        @RequestParam(name = "size", defaultValue = "10") Integer size,
                                        Map<String, Object> map){
-        PageRequest pageRequest = new PageRequest(page - 1, size);
+        Sort sort = new Sort(Sort.Direction.DESC, "createTime");
+        PageRequest pageRequest = new PageRequest(page - 1, size, sort);
         Page<ProductInfo> productInfos = productService.findAll(pageRequest);
         map.put("productInfos", productInfos);
         map.put("currentPage", page);
@@ -115,7 +118,7 @@ public class SellerProductController {
      */
     @ResponseBody
     @PostMapping("/add")
-    public ResultVo addProduct(@Valid ProductForm productForm,
+    public ResultVo addProduct(@Valid @RequestBody ProductForm productForm,
                                BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             log.error("【创建商品】参数不正确 ProductForm={}", productForm);
@@ -125,7 +128,6 @@ public class SellerProductController {
         productInfo.setProductId(KeyUtil.getUUID());
         BeanUtils.copyProperties(productForm, productInfo);
         productInfo.setProductStatus(ProductStatusEnum.UP.getCode());
-
         try{
             productService.save(productInfo);
         }catch (SellException e){
@@ -133,5 +135,21 @@ public class SellerProductController {
             return ResultVoUtil.error(e.getCode(), e.getMessage());
         }
         return ResultVoUtil.success(new OperationResult(200, "新增商品信息成功！"));
+    }
+
+    @ResponseBody
+    @PostMapping("/edit")
+    public ResultVo aditProduct(@Valid @RequestBody ProductForm productForm,
+                                BindingResult bindingResult){
+        if (bindingResult.hasErrors() || StringUtils.isEmpty(productForm.getProductId())){
+            log.error("【创建商品】参数不正确 ProductForm={}", productForm);
+            throw new SellException(ResultEnum.PARAM_ERROR.getCode(), bindingResult.getFieldError().getDefaultMessage());
+        }
+        try{
+            productService.update(productForm);
+        }catch (SellException e){
+            return ResultVoUtil.error(e.getCode(), e.getMessage());
+        }
+        return ResultVoUtil.success(new OperationResult(200, "更新商品信息成功"));
     }
 }

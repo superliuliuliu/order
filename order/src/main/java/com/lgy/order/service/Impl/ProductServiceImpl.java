@@ -5,9 +5,11 @@ import com.lgy.order.dto.CartDto;
 import com.lgy.order.enums.ProductStatusEnum;
 import com.lgy.order.enums.ResultEnum;
 import com.lgy.order.exception.SellException;
+import com.lgy.order.form.ProductForm;
 import com.lgy.order.repository.ProductInfoRepository;
 import com.lgy.order.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,6 +42,17 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductInfo save(ProductInfo productInfo) {
+        return productInfoRepository.save(productInfo);
+    }
+
+    @Override
+    public ProductInfo update(ProductForm productForm) {
+        ProductInfo productInfo = productInfoRepository.findOne(productForm.getProductId());
+        if (productInfo == null){
+            log.error("【更新商品】商品ID错误");
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        BeanUtils.copyProperties(productForm, productInfo);
         return productInfoRepository.save(productInfo);
     }
 

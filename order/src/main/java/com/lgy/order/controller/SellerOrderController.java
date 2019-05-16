@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,7 +48,7 @@ public class SellerOrderController {
     public ModelAndView list(@RequestParam(value = "page", defaultValue = "1") Integer page,
                              @RequestParam(value = "size", defaultValue = "8") Integer size,
                              Map<String, Object> map){
-        PageRequest pageRequest = new PageRequest(page - 1, size);
+        PageRequest pageRequest = new PageRequest(page - 1, size, new Sort(Sort.Direction.DESC, "updateTime"));
         // 查询的分页的主订单数据
         Page<OrderDto> orderDtoPage = orderService.findList(pageRequest);
         map.put("orderDtoPage", orderDtoPage);

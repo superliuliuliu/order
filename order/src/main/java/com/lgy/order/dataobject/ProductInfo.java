@@ -56,7 +56,6 @@ public class ProductInfo {
     /**
      * 商品介绍
      */
-    @Size(max = 64)
     @Column(name = "product_description")
     private String productDescription;
 
