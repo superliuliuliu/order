@@ -1,4 +1,4 @@
-package com.lgy.order.controller;
+package com.lgy.order.controller.Sell;
 
 import com.lgy.order.VO.ResultVo;
 import com.lgy.order.converter.OrderForm2OrderDto;

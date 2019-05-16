@@ -1,4 +1,4 @@
-package com.lgy.order.controller;
+package com.lgy.order.controller.Sell;
 
 import com.lgy.order.dto.OrderDto;
 import com.lgy.order.enums.ResultEnum;

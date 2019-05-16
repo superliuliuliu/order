@@ -1,4 +1,4 @@
-package com.lgy.order.controller;
+package com.lgy.order.controller.Sell;
 
 import com.lgy.order.VO.ProductInfoVo;
 import com.lgy.order.VO.ProductVo;

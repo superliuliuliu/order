@@ -1,4 +1,4 @@
-package com.lgy.order.controller;
+package com.lgy.order.controller.Manage;
 
 import com.lgy.order.VO.ResultVo;
 import com.lgy.order.dataobject.OperationResult;
@@ -125,8 +125,8 @@ public class SellerProductController {
             throw new SellException(ResultEnum.PARAM_ERROR.getCode(), bindingResult.getFieldError().getDefaultMessage());
         }
         ProductInfo productInfo = new ProductInfo();
-        productInfo.setProductId(KeyUtil.getUUID());
         BeanUtils.copyProperties(productForm, productInfo);
+        productInfo.setProductId(KeyUtil.getUUID());
         productInfo.setProductStatus(ProductStatusEnum.UP.getCode());
         try{
             productService.save(productInfo);
@@ -142,7 +142,7 @@ public class SellerProductController {
     public ResultVo aditProduct(@Valid @RequestBody ProductForm productForm,
                                 BindingResult bindingResult){
         if (bindingResult.hasErrors() || StringUtils.isEmpty(productForm.getProductId())){
-            log.error("【创建商品】参数不正确 ProductForm={}", productForm);
+            log.error("【编辑商品】参数不正确 ProductForm={}", productForm);
             throw new SellException(ResultEnum.PARAM_ERROR.getCode(), bindingResult.getFieldError().getDefaultMessage());
         }
         try{
@@ -150,6 +150,6 @@ public class SellerProductController {
         }catch (SellException e){
             return ResultVoUtil.error(e.getCode(), e.getMessage());
         }
-        return ResultVoUtil.success(new OperationResult(200, "更新商品信息成功"));
+        return ResultVoUtil.success(new OperationResult(200, "更新商品操作成功！"));
     }
 }

@@ -1,4 +1,4 @@
-package com.lgy.order.controller;
+package com.lgy.order.controller.Sell;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
