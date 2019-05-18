@@ -1,12 +1,12 @@
 package com.lgy.order.controller.Manage;
 
-import com.lgy.order.VO.ResultVo;
-import com.lgy.order.DO.OperationResult;
-import com.lgy.order.DO.OrderDetail;
-import com.lgy.order.dto.OrderDto;
-import com.lgy.order.exception.SellException;
+import com.lgy.order.model.VO.ResultVo;
+import com.lgy.order.model.DO.OperationResult;
+import com.lgy.order.model.DO.OrderDetail;
+import com.lgy.order.model.dto.OrderDto;
+import com.lgy.order.common.exception.SellException;
 import com.lgy.order.service.OrderService;
-import com.lgy.order.util.ResultVoUtil;
+import com.lgy.order.common.util.ResultVoUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -110,7 +110,7 @@ public class SellerOrderController {
      * complete
      * @description 完结订单
      * @param orderId  订单Id
-     * @return com.lgy.order.VO.ResultVo
+     * @return com.lgy.order.model.VO.ResultVo
      * @author liugaoyang
      * @date 2019/4/7 21:10
      * @version 1.0.0

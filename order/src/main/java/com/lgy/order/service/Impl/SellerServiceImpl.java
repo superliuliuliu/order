@@ -1,6 +1,6 @@
 package com.lgy.order.service.Impl;
 
-import com.lgy.order.DO.SellerInfo;
+import com.lgy.order.model.DO.SellerInfo;
 import com.lgy.order.repository.SellerInfoRepository;
 import com.lgy.order.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;

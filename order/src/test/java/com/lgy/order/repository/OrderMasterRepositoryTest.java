@@ -1,6 +1,6 @@
 package com.lgy.order.repository;
 
-import com.lgy.order.DO.OrderMaster;
+import com.lgy.order.model.DO.OrderMaster;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

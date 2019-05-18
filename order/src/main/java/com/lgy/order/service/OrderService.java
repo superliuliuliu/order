@@ -1,7 +1,7 @@
 package com.lgy.order.service;
 
 
-import com.lgy.order.dto.OrderDto;
+import com.lgy.order.model.dto.OrderDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

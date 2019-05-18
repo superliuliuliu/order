@@ -1,13 +1,13 @@
 package com.lgy.order.controller.Sell;
 
-import com.lgy.order.VO.ProductInfoVo;
-import com.lgy.order.VO.ProductVo;
-import com.lgy.order.VO.ResultVo;
-import com.lgy.order.DO.ProductCategory;
-import com.lgy.order.DO.ProductInfo;
+import com.lgy.order.model.VO.ProductInfoVo;
+import com.lgy.order.model.VO.ProductVo;
+import com.lgy.order.model.VO.ResultVo;
+import com.lgy.order.model.DO.ProductCategory;
+import com.lgy.order.model.DO.ProductInfo;
 import com.lgy.order.service.CategoryService;
 import com.lgy.order.service.ProductService;
-import com.lgy.order.util.ResultVoUtil;
+import com.lgy.order.common.util.ResultVoUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

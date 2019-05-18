@@ -1,15 +1,15 @@
 package com.lgy.order.controller.Manage;
 
-import com.lgy.order.VO.ResultVo;
-import com.lgy.order.DO.OperationResult;
-import com.lgy.order.DO.ProductInfo;
-import com.lgy.order.enums.ProductStatusEnum;
-import com.lgy.order.enums.ResultEnum;
-import com.lgy.order.exception.SellException;
-import com.lgy.order.form.ProductForm;
+import com.lgy.order.model.VO.ResultVo;
+import com.lgy.order.model.DO.OperationResult;
+import com.lgy.order.model.DO.ProductInfo;
+import com.lgy.order.common.enums.ProductStatusEnum;
+import com.lgy.order.common.enums.ResultEnum;
+import com.lgy.order.common.exception.SellException;
+import com.lgy.order.model.form.ProductForm;
 import com.lgy.order.service.ProductService;
-import com.lgy.order.util.KeyUtil;
-import com.lgy.order.util.ResultVoUtil;
+import com.lgy.order.common.util.KeyUtil;
+import com.lgy.order.common.util.ResultVoUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +66,7 @@ public class SellerProductController {
      * doObtained
      * @description 商品下架
      * @param productId 商品ID
-     * @return com.lgy.order.VO.ResultVo
+     * @return com.lgy.order.model.VO.ResultVo
      * @author liugaoyang
      * @date 2019/5/12 9:49
      * @version 1.0.0
@@ -88,7 +88,7 @@ public class SellerProductController {
      * doShelf
      * @description 商品上架操作
      * @param productId 商品ID
-     * @return com.lgy.order.VO.ResultVo
+     * @return com.lgy.order.model.VO.ResultVo
      * @author liugaoyang
      * @date 2019/5/12 11:16
      * @version 1.0.0
@@ -111,7 +111,7 @@ public class SellerProductController {
      * addProduct
      * @description 新增商品  默认上架状态
      * @param
-     * @return com.lgy.order.VO.ResultVo
+     * @return com.lgy.order.model.VO.ResultVo
      * @author liugaoyang
      * @date 2019/5/12 17:22
      * @version 1.0.0

@@ -1,14 +1,14 @@
 package com.lgy.order.controller.Sell;
 
-import com.lgy.order.VO.ResultVo;
-import com.lgy.order.converter.OrderForm2OrderDto;
-import com.lgy.order.dto.OrderDto;
-import com.lgy.order.enums.ResultEnum;
-import com.lgy.order.exception.SellException;
-import com.lgy.order.form.OrderForm;
+import com.lgy.order.model.VO.ResultVo;
+import com.lgy.order.common.converter.OrderForm2OrderDto;
+import com.lgy.order.model.dto.OrderDto;
+import com.lgy.order.common.enums.ResultEnum;
+import com.lgy.order.common.exception.SellException;
+import com.lgy.order.model.form.OrderForm;
 import com.lgy.order.service.BuyerService;
 import com.lgy.order.service.OrderService;
-import com.lgy.order.util.ResultVoUtil;
+import com.lgy.order.common.util.ResultVoUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -51,7 +51,7 @@ public class BuyerOrderController {
      * create
      * @description 买家新建订单 返回给前端的vo里 只需有生成的订单id即可其他信息不需要返回 在这里以Map的形式返回订单数据
      * @param orderForm 需要进行校验的订单信息
-     * @return com.lgy.order.VO.ResultVo
+     * @return com.lgy.order.model.VO.ResultVo
      * @author liugaoyang
      * @date 2019/3/21 7:54
      * @version 1.0.0

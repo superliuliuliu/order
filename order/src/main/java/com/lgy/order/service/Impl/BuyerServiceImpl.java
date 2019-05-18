@@ -1,8 +1,8 @@
 package com.lgy.order.service.Impl;
 
-import com.lgy.order.dto.OrderDto;
-import com.lgy.order.enums.ResultEnum;
-import com.lgy.order.exception.SellException;
+import com.lgy.order.model.dto.OrderDto;
+import com.lgy.order.common.enums.ResultEnum;
+import com.lgy.order.common.exception.SellException;
 import com.lgy.order.service.BuyerService;
 import com.lgy.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;

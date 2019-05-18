@@ -1,8 +1,8 @@
 package com.lgy.order.service;
 
-import com.lgy.order.DO.ProductInfo;
-import com.lgy.order.dto.CartDto;
-import com.lgy.order.form.ProductForm;
+import com.lgy.order.model.DO.ProductInfo;
+import com.lgy.order.model.dto.CartDto;
+import com.lgy.order.model.form.ProductForm;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

@@ -1,20 +1,20 @@
 package com.lgy.order.service.Impl;
 
-import com.lgy.order.converter.OrderMaster2OrderDto;
-import com.lgy.order.DO.OrderDetail;
-import com.lgy.order.DO.OrderMaster;
-import com.lgy.order.DO.ProductInfo;
-import com.lgy.order.dto.CartDto;
-import com.lgy.order.dto.OrderDto;
-import com.lgy.order.enums.OrderStatusEnum;
-import com.lgy.order.enums.PayStatusEnum;
-import com.lgy.order.enums.ResultEnum;
-import com.lgy.order.exception.SellException;
+import com.lgy.order.common.converter.OrderMaster2OrderDto;
+import com.lgy.order.model.DO.OrderDetail;
+import com.lgy.order.model.DO.OrderMaster;
+import com.lgy.order.model.DO.ProductInfo;
+import com.lgy.order.model.dto.CartDto;
+import com.lgy.order.model.dto.OrderDto;
+import com.lgy.order.common.enums.OrderStatusEnum;
+import com.lgy.order.common.enums.PayStatusEnum;
+import com.lgy.order.common.enums.ResultEnum;
+import com.lgy.order.common.exception.SellException;
 import com.lgy.order.repository.OrderDetailRepository;
 import com.lgy.order.repository.OrderMasterRepository;
 import com.lgy.order.service.OrderService;
 import com.lgy.order.service.ProductService;
-import com.lgy.order.util.KeyUtil;
+import com.lgy.order.common.util.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
      * create
      * @description 新建订单 对应顾客的下单操作
      * @param orderDto 顾客下单的信息 从前端返回  一般含有商品ID 商品数量 顾客信息等内容
-     * @return com.lgy.order.dto.OrderDto
+     * @return com.lgy.order.model.dto.OrderDto
      * @author liugaoyang
      * @date 2019/4/1 14:31
      * @version 1.0.0
@@ -99,7 +99,7 @@ public class OrderServiceImpl implements OrderService {
      * findOne
      * @description 根据订单ID来查询订单信息
      * @param orderId 订单的唯一ID
-     * @return com.lgy.order.dto.OrderDto
+     * @return com.lgy.order.model.dto.OrderDto
      * @author liugaoyang
      * @date 2019/4/1 14:30
      * @version 1.0.0
@@ -126,7 +126,7 @@ public class OrderServiceImpl implements OrderService {
      * @description 支持商家在后台管理系统中输入电话号码进行模糊查询
      * @param phone 手机号码
      * @param pageable 数据分页格式
-     * @return org.springframework.data.domain.Page<com.lgy.order.dto.OrderDto>
+     * @return org.springframework.data.domain.Page<com.lgy.order.model.dto.OrderDto>
      * @author liugaoyang
      * @date 2019/4/2 10:03
      * @version 1.0.0
@@ -143,7 +143,7 @@ public class OrderServiceImpl implements OrderService {
      * @description 支持商家在后台管理系统中输入顾客姓名进行模糊查询
      * @param name 顾客姓名
      * @param pageable 数据分页格式
-     * @return org.springframework.data.domain.Page<com.lgy.order.dto.OrderDto>
+     * @return org.springframework.data.domain.Page<com.lgy.order.model.dto.OrderDto>
      * @author liugaoyang
      * @date 2019/4/2 10:04
      * @version 1.0.0
@@ -175,7 +175,7 @@ public class OrderServiceImpl implements OrderService {
      * findList
      * @description 商家订单后台管理系统查询订单列表
      * @param pageable 分页数据规格
-     * @return org.springframework.data.domain.Page<com.lgy.order.dto.OrderDto>
+     * @return org.springframework.data.domain.Page<com.lgy.order.model.dto.OrderDto>
      * @author liugaoyang
      * @date 2019/4/1 14:28
      * @version 1.0.0
@@ -241,7 +241,7 @@ public class OrderServiceImpl implements OrderService {
      * finish
      * @description 完结订单
      * @param orderDto
-     * @return com.lgy.order.dto.OrderDto
+     * @return com.lgy.order.model.dto.OrderDto
      * @author liugaoyang
      * @date 2019/3/20 17:30
      * @version 1.0.0
@@ -276,7 +276,7 @@ public class OrderServiceImpl implements OrderService {
      * paid
      * @description 对应订单的支付操作  将对应状态为修改为已支付状态  在支付订单时 不仅要判定支付状态  还要判定订单的状态
      * @param orderDto
-     * @return com.lgy.order.dto.OrderDto
+     * @return com.lgy.order.model.dto.OrderDto
      * @author liugaoyang
      * @date 2019/3/19 9:05
      * @version 1.0.0

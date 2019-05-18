@@ -1,6 +1,6 @@
 package com.lgy.order.service;
 
-import com.lgy.order.dto.OrderDto;
+import com.lgy.order.model.dto.OrderDto;
 
 public interface BuyerService {
 

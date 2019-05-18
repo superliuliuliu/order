@@ -1,7 +1,7 @@
 package com.lgy.order.controller.Sell;
 
-import com.lgy.order.enums.ResultEnum;
-import com.lgy.order.exception.SellException;
+import com.lgy.order.common.enums.ResultEnum;
+import com.lgy.order.common.exception.SellException;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.error.WxErrorException;

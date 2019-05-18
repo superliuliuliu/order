@@ -1,11 +1,11 @@
 package com.lgy.order.service.Impl;
 
-import com.lgy.order.DO.ProductInfo;
-import com.lgy.order.dto.CartDto;
-import com.lgy.order.enums.ProductStatusEnum;
-import com.lgy.order.enums.ResultEnum;
-import com.lgy.order.exception.SellException;
-import com.lgy.order.form.ProductForm;
+import com.lgy.order.model.DO.ProductInfo;
+import com.lgy.order.model.dto.CartDto;
+import com.lgy.order.common.enums.ProductStatusEnum;
+import com.lgy.order.common.enums.ResultEnum;
+import com.lgy.order.common.exception.SellException;
+import com.lgy.order.model.form.ProductForm;
 import com.lgy.order.repository.ProductInfoRepository;
 import com.lgy.order.service.ProductService;
 import lombok.extern.slf4j.Slf4j;

@@ -1,6 +1,6 @@
 package com.lgy.order.service.Impl;
 
-import com.lgy.order.DO.ProductCategory;
+import com.lgy.order.model.DO.ProductCategory;
 import com.lgy.order.repository.ProductCategoryRepository;
 import com.lgy.order.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

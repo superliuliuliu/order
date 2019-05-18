@@ -1,7 +1,7 @@
 package com.lgy.order.service.Impl;
 
-import com.lgy.order.DO.OrderDetail;
-import com.lgy.order.dto.OrderDto;
+import com.lgy.order.model.DO.OrderDetail;
+import com.lgy.order.model.dto.OrderDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.LoggerFactory;

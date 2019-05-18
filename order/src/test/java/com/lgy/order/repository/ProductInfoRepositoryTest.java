@@ -1,6 +1,6 @@
 package com.lgy.order.repository;
 
-import com.lgy.order.DO.ProductInfo;
+import com.lgy.order.model.DO.ProductInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;

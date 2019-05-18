@@ -1,6 +1,6 @@
 package com.lgy.order.service.Impl;
 
-import com.lgy.order.DO.ProductCategory;
+import com.lgy.order.model.DO.ProductCategory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

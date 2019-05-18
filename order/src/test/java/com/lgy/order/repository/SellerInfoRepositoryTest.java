@@ -1,7 +1,7 @@
 package com.lgy.order.repository;
 
-import com.lgy.order.DO.SellerInfo;
-import com.lgy.order.util.KeyUtil;
+import com.lgy.order.model.DO.SellerInfo;
+import com.lgy.order.common.util.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;

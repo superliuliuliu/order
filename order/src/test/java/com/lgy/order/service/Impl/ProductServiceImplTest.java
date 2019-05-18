@@ -1,8 +1,8 @@
 package com.lgy.order.service.Impl;
 
 import com.google.gson.Gson;
-import com.lgy.order.DO.ProductInfo;
-import com.lgy.order.form.ProductForm;
+import com.lgy.order.model.DO.ProductInfo;
+import com.lgy.order.model.form.ProductForm;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;

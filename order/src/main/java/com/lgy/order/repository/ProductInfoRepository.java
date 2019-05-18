@@ -1,6 +1,6 @@
 package com.lgy.order.repository;
 
-import com.lgy.order.DO.ProductInfo;
+import com.lgy.order.model.DO.ProductInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
