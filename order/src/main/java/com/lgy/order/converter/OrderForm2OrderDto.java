@@ -2,7 +2,7 @@ package com.lgy.order.converter;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.lgy.order.dataobject.OrderDetail;
+import com.lgy.order.DO.OrderDetail;
 import com.lgy.order.dto.OrderDto;
 import com.lgy.order.enums.ResultEnum;
 import com.lgy.order.exception.SellException;

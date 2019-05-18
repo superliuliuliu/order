@@ -1,4 +1,4 @@
-package com.lgy.order.dataobject;
+package com.lgy.order.DO;
 
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;

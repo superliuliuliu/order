@@ -1,6 +1,6 @@
 package com.lgy.order.service.Impl;
 
-import com.lgy.order.dataobject.ProductInfo;
+import com.lgy.order.DO.ProductInfo;
 import com.lgy.order.dto.CartDto;
 import com.lgy.order.enums.ProductStatusEnum;
 import com.lgy.order.enums.ResultEnum;

@@ -1,6 +1,6 @@
 package com.lgy.order.service;
 
-import com.lgy.order.dataobject.ProductCategory;
+import com.lgy.order.DO.ProductCategory;
 
 import java.util.List;
 

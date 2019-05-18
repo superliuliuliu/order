@@ -1,9 +1,7 @@
 package com.lgy.order.service.Impl;
 
-import com.lgy.order.dataobject.OrderDetail;
+import com.lgy.order.DO.OrderDetail;
 import com.lgy.order.dto.OrderDto;
-import com.lgy.order.repository.OrderMasterRepositoryTest;
-import com.lgy.order.service.OrderService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.LoggerFactory;
@@ -15,8 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

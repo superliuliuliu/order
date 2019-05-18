@@ -1,6 +1,6 @@
 package com.lgy.order.repository;
 
-import com.lgy.order.dataobject.ProductInfo;
+import com.lgy.order.DO.ProductInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,8 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.UUID;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @Slf4j

@@ -1,4 +1,4 @@
-package com.lgy.order.dataobject;
+package com.lgy.order.DO;
 
 import com.lgy.order.enums.OrderStatusEnum;
 import com.lgy.order.enums.PayStatusEnum;

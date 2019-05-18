@@ -1,6 +1,6 @@
 package com.lgy.order.converter;
 
-import com.lgy.order.dataobject.OrderMaster;
+import com.lgy.order.DO.OrderMaster;
 import com.lgy.order.dto.OrderDto;
 import org.springframework.beans.BeanUtils;
 

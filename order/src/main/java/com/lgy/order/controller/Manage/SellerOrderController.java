@@ -1,8 +1,8 @@
 package com.lgy.order.controller.Manage;
 
 import com.lgy.order.VO.ResultVo;
-import com.lgy.order.dataobject.OperationResult;
-import com.lgy.order.dataobject.OrderDetail;
+import com.lgy.order.DO.OperationResult;
+import com.lgy.order.DO.OrderDetail;
 import com.lgy.order.dto.OrderDto;
 import com.lgy.order.exception.SellException;
 import com.lgy.order.service.OrderService;

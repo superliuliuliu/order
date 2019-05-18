@@ -1,6 +1,6 @@
 package com.lgy.order.repository;
 
-import com.lgy.order.dataobject.OrderMaster;
+import com.lgy.order.DO.OrderMaster;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,7 +15,7 @@ public interface OrderMasterRepository extends JpaRepository<OrderMaster, String
      * @description 根据购买者的微信号查询订单信息
      * @param buyerOpenid  购买者微信openid  由微信提供
      * @param pageable  分页数据格式
-     * @return org.springframework.data.domain.Page<com.lgy.order.dataobject.OrderMaster>
+     * @return org.springframework.data.domain.Page<com.lgy.order.DO.OrderMaster>
      * @author liugaoyang
      * @date 2019/4/2 14:23
      * @version 1.0.0
@@ -28,7 +28,7 @@ public interface OrderMasterRepository extends JpaRepository<OrderMaster, String
      * @description
      * @param buyerPhone  购买者手机号码
      * @param pageable  分页数据格式
-     * @return org.springframework.data.domain.Page<com.lgy.order.dataobject.OrderMaster>
+     * @return org.springframework.data.domain.Page<com.lgy.order.DO.OrderMaster>
      * @author liugaoyang
      * @date 2019/4/2 14:30
      * @version 1.0.0
@@ -40,7 +40,7 @@ public interface OrderMasterRepository extends JpaRepository<OrderMaster, String
      * @description 根据购买者手机号模糊查询订单信息
      * @param phone 购买者的手机号码 （模糊查询）
      * @param pageable 分页数据格式
-     * @return org.springframework.data.domain.Page<com.lgy.order.dataobject.OrderMaster>
+     * @return org.springframework.data.domain.Page<com.lgy.order.DO.OrderMaster>
      * @author liugaoyang
      * @date 2019/4/2 14:24
      * @version 1.0.0

@@ -1,7 +1,7 @@
 package com.lgy.order.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.lgy.order.dataobject.OrderDetail;
+import com.lgy.order.DO.OrderDetail;
 import com.lgy.order.enums.OrderStatusEnum;
 import com.lgy.order.enums.PayStatusEnum;
 import com.lgy.order.util.EnumUtil;

@@ -1,8 +1,8 @@
 package com.lgy.order.controller.Manage;
 
 import com.lgy.order.VO.ResultVo;
-import com.lgy.order.dataobject.OperationResult;
-import com.lgy.order.dataobject.ProductInfo;
+import com.lgy.order.DO.OperationResult;
+import com.lgy.order.DO.ProductInfo;
 import com.lgy.order.enums.ProductStatusEnum;
 import com.lgy.order.enums.ResultEnum;
 import com.lgy.order.exception.SellException;

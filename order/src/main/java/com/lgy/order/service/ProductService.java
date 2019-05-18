@@ -1,6 +1,6 @@
 package com.lgy.order.service;
 
-import com.lgy.order.dataobject.ProductInfo;
+import com.lgy.order.DO.ProductInfo;
 import com.lgy.order.dto.CartDto;
 import com.lgy.order.form.ProductForm;
 import org.springframework.data.domain.Page;
