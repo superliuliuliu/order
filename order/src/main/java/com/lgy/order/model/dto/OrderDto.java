@@ -7,6 +7,7 @@ import com.lgy.order.common.enums.PayStatusEnum;
 import com.lgy.order.common.util.EnumUtil;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +23,9 @@ import java.util.List;
  */
 @Data
 //@JsonInclude(JsonInclude.Include.NON_NULL)//该注解的作用是 当返回的json数据中有值为空时不返回null的数据 不足之处是该注解只对单个对象有效为了批量配置 我们可以在配置文件中进行配置已实现批量操作
-public class OrderDto {
+public class OrderDto implements Serializable {
+
+    private static final long serialVersionUID = -5427026193193303081L;
     private String orderId;
 
     private String buyerName;

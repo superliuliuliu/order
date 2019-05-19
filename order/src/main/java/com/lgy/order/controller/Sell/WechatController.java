@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import static java.net.URLEncoder.*;
@@ -38,9 +39,9 @@ public class WechatController {
       * @description 每次都需要授权后才能在微信app上访问相关url   returnUrl接收的是未经过处理想去访问的地址  redirectUrl则是经过授权处理的微信里能够访问的URL
       */
     @GetMapping(value = "/authorize")
-    public String authorize(@RequestParam("returnUrl") String returnUrl){
+    public String authorize(@RequestParam("returnUrl") String returnUrl) throws UnsupportedEncodingException {
         String url = "http://liugaoyang.natapp1.cc/sell/wechat/userInfo";
-        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, encode(returnUrl));
+        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, encode(returnUrl, "UTF-8"));
         return "redirect:" + redirectUrl;
 
     }

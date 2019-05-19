@@ -18,6 +18,8 @@ import com.lgy.order.common.util.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,6 +54,7 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     @Transactional
+    @CachePut(cacheNames = "order", key = "002")
     public OrderDto create(OrderDto orderDto) {
         //首先从数据库中查询商品的数量和价格
         //计算总价

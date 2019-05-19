@@ -13,6 +13,8 @@ import com.lgy.order.common.util.ResultVoUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -116,6 +118,7 @@ public class SellerProductController {
      * @date 2019/5/12 17:22
      * @version 1.0.0
      */
+    //@CacheEvict(cacheNames = "product", key = "123")
     @ResponseBody
     @PostMapping("/add")
     public ResultVo addProduct(@Valid @RequestBody ProductForm productForm,
@@ -137,6 +140,7 @@ public class SellerProductController {
         return ResultVoUtil.success(new OperationResult(200, "新增商品信息成功！"));
     }
 
+    //@CacheEvict(cacheNames = "product", key = "123")
     @ResponseBody
     @PostMapping("/edit")
     public ResultVo aditProduct(@Valid @RequestBody ProductForm productForm,

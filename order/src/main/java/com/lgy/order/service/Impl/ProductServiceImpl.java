@@ -11,6 +11,8 @@ import com.lgy.order.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,7 @@ public class ProductServiceImpl implements ProductService {
     private ProductInfoRepository productInfoRepository;
 
     @Override
+    @Cacheable(cacheNames = "product", key = "003")
     public ProductInfo findOne(String productId) {
         return productInfoRepository.findById(productId).orElse(null);
     }
@@ -40,11 +43,13 @@ public class ProductServiceImpl implements ProductService {
         return productInfoRepository.findByProductStatus(ProductStatusEnum.UP.getCode());
 }
 
+    @CachePut(cacheNames = "product", key = "003")
     @Override
     public ProductInfo save(ProductInfo productInfo) {
         return productInfoRepository.save(productInfo);
     }
 
+    @CachePut(cacheNames = "product", key = "003")
     @Override
     public ProductInfo update(ProductForm productForm) {
         ProductInfo productInfo = productInfoRepository.findById(productForm.getProductId()).orElse(null);

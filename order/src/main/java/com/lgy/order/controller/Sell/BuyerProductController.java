@@ -10,6 +10,7 @@ import com.lgy.order.service.ProductService;
 import com.lgy.order.common.util.ResultVoUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,6 +30,7 @@ public class BuyerProductController {
     @Autowired
     private CategoryService categoryService;
 
+    //@Cacheable(cacheNames = "product", key = "123")
     @RequestMapping(value = "/list")
     public ResultVo index(){
         //首先查询所有上架的商品信息

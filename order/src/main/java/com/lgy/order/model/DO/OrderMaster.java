@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -17,8 +18,9 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "order_master")
-public class OrderMaster {
+public class OrderMaster implements Serializable {
 
+    private static final long serialVersionUID = -7120611968125852918L;
     @Id
     @Size(max = 32)
     @Column(name = "order_id")

@@ -2,8 +2,10 @@ package com.lgy.order.service.Impl;
 
 import com.lgy.order.common.exception.SellException;
 import com.lgy.order.common.util.KeyUtil;
+import com.lgy.order.service.RedisLockService;
 import com.lgy.order.service.SecKillService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -12,6 +14,12 @@ import java.util.Map;
 @Service
 @Slf4j
 public class SecKillServiceImpl implements SecKillService {
+
+    @Autowired
+    private RedisLockService redisLockService;
+
+    // redisLock超时时间
+    private static final int TIMEOUT = 10*1000;
 
     // 用三个HashMap 分别作为商品信息 库存信息  订单信息的缓存
     static Map<String, Integer> products;
@@ -45,6 +53,10 @@ public class SecKillServiceImpl implements SecKillService {
 
     @Override
     public void orderProductMockDiffUser(String productId) {
+        long time = System.currentTimeMillis() + TIMEOUT;
+        if (!redisLockService.lock(productId, String.valueOf(time))){
+            throw new SellException(101, "访问人次太多请稍后重试！");
+        }
         int stockNum = stocks.get(productId);
         if (stockNum == 0){
             throw new SellException(100, "秒杀活动已经结束");
@@ -60,5 +72,7 @@ public class SecKillServiceImpl implements SecKillService {
             }
             stocks.put(productId,stockNum);
         }
+
+        redisLockService.unlock(productId, String.valueOf(time));
     }
 }

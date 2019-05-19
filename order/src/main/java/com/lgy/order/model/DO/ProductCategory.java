@@ -5,6 +5,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -15,8 +16,9 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name = "product_category")
-public class ProductCategory {
+public class ProductCategory implements Serializable {
 
+    private static final long serialVersionUID = 7192543308557989612L;
     /**
      * 类目id
      */
