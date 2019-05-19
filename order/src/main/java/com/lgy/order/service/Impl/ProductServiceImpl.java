@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductInfo findOne(String productId) {
-        return productInfoRepository.findOne(productId);
+        return productInfoRepository.findById(productId).orElse(null);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductInfo update(ProductForm productForm) {
-        ProductInfo productInfo = productInfoRepository.findOne(productForm.getProductId());
+        ProductInfo productInfo = productInfoRepository.findById(productForm.getProductId()).orElse(null);
         if (productInfo == null){
             log.error("【更新商品】商品ID错误");
             throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
@@ -60,7 +60,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public ProductInfo obtain(ProductInfo productInfo) {
         String productId = productInfo.getProductId();
-        ProductInfo productInfo1 = productInfoRepository.findOne(productId);
+        ProductInfo productInfo1 = productInfoRepository.findById(productId).orElse(null);
         if (productInfo1 == null){
             log.error("【更新商品上下架】此商品不存在");
             throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
@@ -77,7 +77,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public ProductInfo Shelf(ProductInfo productInfo) {
         String productId = productInfo.getProductId();
-        ProductInfo productInfo1 = productInfoRepository.findOne(productId);
+        ProductInfo productInfo1 = productInfoRepository.findById(productId).orElse(null);
         if (productInfo1 == null){
             log.error("【更新商品上下架】此商品不存在");
             throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
@@ -94,7 +94,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public void increaseStock(List<CartDto> cartDtoList) {
         for(CartDto cartDto: cartDtoList){
-            ProductInfo productInfo = productInfoRepository.findOne(cartDto.getProductId());
+            ProductInfo productInfo = productInfoRepository.findById(cartDto.getProductId()).orElse(null);
             if (productInfo == null){
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
             }
@@ -107,7 +107,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public void decreaseStock(List<CartDto> cartDtoList) {
         for(CartDto cartDto: cartDtoList){
-            ProductInfo productInfo = productInfoRepository.findOne(cartDto.getProductId());
+            ProductInfo productInfo = productInfoRepository.findById(cartDto.getProductId()).orElse(null);
             if (productInfo == null){
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
             }

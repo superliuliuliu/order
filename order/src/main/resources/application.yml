@@ -8,4 +8,5 @@ spring:
     time-zone: GMT+8 #日期序列化走北京时间
     default-property-inclusion: non_null #对json数据进行批量配置使返回的数据不为空
 server:
-  context-path: /sell
+  servlet:
+    context-path: /sell

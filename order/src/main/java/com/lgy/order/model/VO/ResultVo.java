@@ -2,6 +2,8 @@ package com.lgy.order.model.VO;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 
 /**
  * ResultVo
@@ -13,7 +15,9 @@ import lombok.Data;
  * @version 1.0.0
  */
 @Data
-public class ResultVo<T> {
+public class ResultVo<T> implements Serializable {
+
+    private static final long serialVersionUID = 444287145150626211L;
 
     private Integer code;
 

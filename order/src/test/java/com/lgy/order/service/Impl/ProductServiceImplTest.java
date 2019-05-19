@@ -39,7 +39,7 @@ public class ProductServiceImplTest {
     @Test
     public void findAll() {
         //Pageable只是一个接口而不是一个类  pageRequest实现了该接口
-        PageRequest pageRequest = new PageRequest(0,5);
+        PageRequest pageRequest = PageRequest.of(0,5);
         Page<ProductInfo> productInfoPage = productService.findAll(pageRequest);
         System.out.println(productInfoPage.getTotalElements());
 

@@ -48,7 +48,7 @@ public class SellerOrderController {
     public ModelAndView list(@RequestParam(value = "page", defaultValue = "1") Integer page,
                              @RequestParam(value = "size", defaultValue = "8") Integer size,
                              Map<String, Object> map){
-        PageRequest pageRequest = new PageRequest(page - 1, size, new Sort(Sort.Direction.DESC, "updateTime"));
+        PageRequest pageRequest = PageRequest.of(page - 1, size, new Sort(Sort.Direction.DESC, "updateTime"));
         // 查询的分页的主订单数据
         Page<OrderDto> orderDtoPage = orderService.findList(pageRequest);
         map.put("orderDtoPage", orderDtoPage);

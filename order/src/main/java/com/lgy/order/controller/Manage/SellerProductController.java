@@ -55,7 +55,7 @@ public class SellerProductController {
                                        @RequestParam(name = "size", defaultValue = "10") Integer size,
                                        Map<String, Object> map){
         Sort sort = new Sort(Sort.Direction.DESC, "createTime");
-        PageRequest pageRequest = new PageRequest(page - 1, size, sort);
+        PageRequest pageRequest = PageRequest.of(page - 1, size, sort);
         Page<ProductInfo> productInfos = productService.findAll(pageRequest);
         map.put("productInfos", productInfos);
         map.put("currentPage", page);

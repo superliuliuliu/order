@@ -2,7 +2,9 @@ package com.lgy.order.common.exception;
 
 import com.lgy.order.common.enums.ResultEnum;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class SellException extends RuntimeException{
 

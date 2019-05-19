@@ -47,14 +47,14 @@ public class OrderMasterRepositoryTest {
 
     @Test
     public void findByOpenidTest(){
-        PageRequest pageRequest = new PageRequest(0,5);
+        PageRequest pageRequest = PageRequest.of(0,5);
         Page<OrderMaster> result = orderMasterRepository.findByBuyerOpenid("734190426", pageRequest);
         logger.info("总共的数据量：" + result.getTotalElements());
     }
 
     @Test
     public void findByPhoneTest(){
-        PageRequest pageRequest = new PageRequest(0,5);
+        PageRequest pageRequest = PageRequest.of(0,5);
         Page<OrderMaster> result = orderMasterRepository.findByBuyerPhone("15837562085", pageRequest);
         logger.info("总共的数据量：" + result.getTotalElements());
     }

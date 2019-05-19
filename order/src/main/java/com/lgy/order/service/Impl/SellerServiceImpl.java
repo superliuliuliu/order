@@ -4,7 +4,9 @@ import com.lgy.order.model.DO.SellerInfo;
 import com.lgy.order.repository.SellerInfoRepository;
 import com.lgy.order.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class SellerServiceImpl implements SellerService {
     @Autowired
     private SellerInfoRepository sellerInfoRepository;

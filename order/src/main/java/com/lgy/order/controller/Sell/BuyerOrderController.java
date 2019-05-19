@@ -90,7 +90,7 @@ public class BuyerOrderController {
             log.error("【订单列表查询】参数不能为空");
             throw new SellException(ResultEnum.PARAM_ERROR);
         }
-        PageRequest pageRequest = new PageRequest(page, size);
+        PageRequest pageRequest = PageRequest.of(page, size);
         Page<OrderDto> orderDtoPage = orderService.findList(openid, pageRequest);
         return ResultVoUtil.success(orderDtoPage.getContent());
     }

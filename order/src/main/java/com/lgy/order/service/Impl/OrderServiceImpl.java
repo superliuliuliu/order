@@ -106,7 +106,7 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public OrderDto findOne(String orderId) {
-        OrderMaster orderMaster = orderMasterRepository.findOne(orderId);
+        OrderMaster orderMaster = orderMasterRepository.findById(orderId).orElse(null);
         if(orderMaster == null){
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }
@@ -184,7 +184,7 @@ public class OrderServiceImpl implements OrderService {
     public Page<OrderDto> findList(Pageable pageable) {
         //根据订单的创建时间排序  逆序排序大的在前面 即新创建的订单排列在前面
         Sort sort = new Sort(Sort.Direction.DESC, "createTime");
-        Pageable sortPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), sort);
+        Pageable sortPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
         Page<OrderMaster> orderMasterPage = orderMasterRepository.findAll(sortPageable);
         List<OrderDto> orderDtoList = OrderMaster2OrderDto.convert(orderMasterPage.getContent());
         return new PageImpl<>(orderDtoList, pageable, orderMasterPage.getTotalElements());
@@ -204,7 +204,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto cancel(OrderDto orderDto) {
         //在修改订单状态之时 首先要查看订单的状态
         String orderId = orderDto.getOrderId();
-        OrderMaster orderMaster = orderMasterRepository.findOne(orderId);
+        OrderMaster orderMaster = orderMasterRepository.findById(orderId).orElse(null);
         if(orderMaster == null){
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }
@@ -251,7 +251,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto finish(OrderDto orderDto) {
         //首先根据订单ID查询主订单信息
         String orderId = orderDto.getOrderId();
-        OrderMaster orderMaster = orderMasterRepository.findOne(orderId);
+        OrderMaster orderMaster = orderMasterRepository.findById(orderId).orElse(null);
         if(orderMaster == null){
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }
@@ -284,7 +284,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto paid(OrderDto orderDto) {
         //在修改订单状态之时 订单dto对象中id属性不应该为空
         String orderId = orderDto.getOrderId();
-        OrderMaster orderMaster = orderMasterRepository.findOne(orderId);
+        OrderMaster orderMaster = orderMasterRepository.findById(orderId).orElse(null);
         if(orderMaster == null){
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }

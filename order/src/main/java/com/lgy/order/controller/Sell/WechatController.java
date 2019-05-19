@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.net.URLEncoder;
 
+import static java.net.URLEncoder.*;
+
 /**
  * WechatController
  * @description 通过第三方SDK来获取所需的相关授权信息
@@ -38,7 +40,7 @@ public class WechatController {
     @GetMapping(value = "/authorize")
     public String authorize(@RequestParam("returnUrl") String returnUrl){
         String url = "http://liugaoyang.natapp1.cc/sell/wechat/userInfo";
-        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, URLEncoder.encode(returnUrl));
+        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, encode(returnUrl));
         return "redirect:" + redirectUrl;
 
     }
