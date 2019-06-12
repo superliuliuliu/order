@@ -58,7 +58,7 @@ public class SellerProductController {
                                        Map<String, Object> map){
         Sort sort = new Sort(Sort.Direction.DESC, "createTime");
         PageRequest pageRequest = PageRequest.of(page - 1, size, sort);
-        Page<ProductInfo> productInfos = productService.findAll(pageRequest);
+         Page<ProductInfo> productInfos = productService.findAll(pageRequest);
         map.put("productInfos", productInfos);
         map.put("currentPage", page);
         return new ModelAndView("product/list", map);
