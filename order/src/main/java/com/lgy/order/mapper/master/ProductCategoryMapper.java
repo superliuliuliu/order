@@ -1,4 +1,4 @@
-package com.lgy.order.mapper;
+package com.lgy.order.mapper.master;
 
 import org.apache.ibatis.annotations.Insert;
 

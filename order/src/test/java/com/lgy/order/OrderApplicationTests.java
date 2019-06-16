@@ -1,7 +1,7 @@
 package com.lgy.order;
 
-import com.lgy.order.common.util.KeyUtil;
-import com.lgy.order.mapper.ProductCategoryMapper;
+import com.lgy.order.mapper.master.ProductCategoryMapper;
+import com.lgy.order.mapper.slave.TestMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +18,9 @@ public class OrderApplicationTests {
 	@Autowired
 	private ProductCategoryMapper productCategoryMapper;
 
+	@Autowired
+	private TestMapper testMapper;
+
 	@Test
 	public void contextLoads() {
 	}
@@ -25,9 +28,9 @@ public class OrderApplicationTests {
 	@Test
 	public void testMybatis(){
 		Map<String, Object> map = new HashMap<>();
-		map.put("category_name", "麻辣专区");
-		map.put("category_type", 4);
-		productCategoryMapper.insertByMap(map);
+		map.put("category_name", "锦鲤专区");
+		map.put("category_type", 6);
+		testMapper.insertByMap(map);
 	}
 
 }
